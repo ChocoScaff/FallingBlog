@@ -75,7 +75,7 @@ public class Element {
 	 * @param couleur
 	 */
 	public void setCouleur(Couleur couleur) {
-		
+		this.couleur = couleur;
 	}
 	
 }
