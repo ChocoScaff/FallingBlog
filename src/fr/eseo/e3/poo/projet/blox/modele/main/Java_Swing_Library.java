@@ -1,3 +1,4 @@
+package fr.eseo.e3.poo.projet.blox.modele.main;
 
 import javax.swing.*;
 import javax.swing.event.*;

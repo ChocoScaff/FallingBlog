@@ -50,7 +50,7 @@ public class Element {
 	 * 
 	 * @return
 	 */
-	public Coordonnes getCoordonnes() {
+	public Coordonnees getCoordonnes() {
 		return this.coordonnees;
 	}
 	
