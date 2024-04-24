@@ -2,7 +2,7 @@ package fr.eseo.e3.poo.projet.blox.modele.pieces;
 
 import fr.eseo.e3.poo.projet.blox.modele.*;
 
-public class OPiece {
+public class OPiece extends Piece {
 	
 	/**
 	 * 
@@ -10,7 +10,8 @@ public class OPiece {
 	 * @param couleur
 	 */
 	public OPiece(Coordonnees coordonnees, Couleur couleur) {
-			
-		
+		super(coordonnees, couleur);
+		// TODO Auto-generated constructor stub
 	}
+	
 }
