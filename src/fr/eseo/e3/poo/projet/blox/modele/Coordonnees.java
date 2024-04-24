@@ -1,8 +1,5 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
-/**
- * @class Coordonnees
- */
 public class Coordonnees {
 	private int abscisse;
 	private int ordonnee;

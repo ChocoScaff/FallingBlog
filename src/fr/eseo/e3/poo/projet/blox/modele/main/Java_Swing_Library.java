@@ -11,8 +11,13 @@ import javax.swing.tree.*;
 
 public class Java_Swing_Library {
 
-    // if width is 0 then the frame is maximized horizontally
-    // if height is 0 then the frame is maximized vertically
+    /**
+     *  
+     * @param title
+     * @param width  if width is 0 then the frame is maximized horizontally
+     * @param height if height is 0 then the frame is maximized vertically
+     * @return
+     */
     public static JFrame setupJFrameAndGet(String title, int width, int height) {
         int state = 0;
         JFrame tmpJF = new JFrame(title);
@@ -32,7 +37,13 @@ public class Java_Swing_Library {
         return tmpJF;
     } // end of setupJFrameAndGet
 
-    // width and height are the preferred width and height of JPanel
+    /**
+     * width and height are the preferred width and height of JPanel
+     * @param title
+     * @param width
+     * @param height
+     * @return
+     */
     public static ArrayList<Object> setupScrollableJFrameAndGetFrameAndPanel(String title, int width, int height) {
         JFrame tmpJF = new JFrame(title);
         tmpJF.setExtendedState(tmpJF.getExtendedState() | JFrame.MAXIMIZED_BOTH);
@@ -56,7 +67,17 @@ public class Java_Swing_Library {
         return tmpA;
     } // end of setupScrollableJFrameAndGetFrameAndPanel
 
-    // actLisObj: object which implements action listener
+    /**
+     * actLisObj: object which implements action listener
+     * @param text
+     * @param actLisObj
+     * @param setBoundsFlag
+     * @param xpos
+     * @param ypos
+     * @param width
+     * @param height
+     * @return
+     */
     public static JButton setupJButtonAndGet(String text, Object actLisObj, boolean setBoundsFlag, int xpos, int ypos, int width, int height) {
         JButton tmpJB = new JButton(text);
         if (setBoundsFlag == true) {
@@ -66,7 +87,20 @@ public class Java_Swing_Library {
         return tmpJB;
     } // end of setupJButtonAndGet
 
-    // halign: horizontal alignment of text, valign: vertical alignment of text
+    /**
+     * halign: horizontal alignment of text, valign: vertical alignment of text
+     * @param text
+     * @param opaque
+     * @param bg
+     * @param halign
+     * @param valign
+     * @param setBoundsFlag
+     * @param xpos
+     * @param ypos
+     * @param width
+     * @param height
+     * @return
+     */
     public static JLabel setupJLabelAndGet(String text, boolean opaque, Color bg, int halign, int valign, boolean setBoundsFlag, int xpos, int ypos, int width, int height) {
         JLabel tmpJL = new JLabel(text);
         if (setBoundsFlag == true) {
@@ -81,12 +115,32 @@ public class Java_Swing_Library {
         return tmpJL;
     } // end of setupJlabelAndGet
 
+    /**
+     * 
+     * @param xpos
+     * @param ypos
+     * @param width
+     * @param height
+     * @return
+     */
     public static JTextField setupJTextFieldAndGet(int xpos, int ypos, int width, int height) {
         JTextField tmpJTF = new JTextField();
         tmpJTF.setBounds(xpos, ypos, width, height);
         return tmpJTF;
     } // end of setupJTextFieldAndGet
 
+    /**
+     * 
+     * @param fmt
+     * @param initialVal
+     * @param propertyChangeLis
+     * @param propertyToListenFor
+     * @param xpos
+     * @param ypos
+     * @param width
+     * @param height
+     * @return
+     */
     public static JFormattedTextField setupJFormattedTextFieldAndGet(Format fmt, Object initialVal, Object propertyChangeLis, String propertyToListenFor, int xpos, int ypos, int width, int height) {
         JFormattedTextField tmpJFTF = new JFormattedTextField(fmt);
         tmpJFTF.setValue(initialVal);
@@ -95,7 +149,17 @@ public class Java_Swing_Library {
         return tmpJFTF;
     } // end of setupJFormattedTextFieldAndGet
 
-    // itemLisObj: object which implements item listener
+    /**
+     * itemLisObj: object which implements item listener
+     * @param text
+     * @param state
+     * @param itemLisObj
+     * @param xpos
+     * @param ypos
+     * @param width
+     * @param height
+     * @return
+     */
     public static JCheckBox setupJCheckBoxAndGet(String text, boolean state, Object itemLisObj, int xpos, int ypos, int width, int height) {
         JCheckBox tmpJCB = new JCheckBox(text, state);
         tmpJCB.setBounds(xpos, ypos, width, height);
@@ -103,7 +167,17 @@ public class Java_Swing_Library {
         return tmpJCB;
     } // end of setupJCheckBoxAndGet
 
-    // actLisObj: object which implements action listener
+    /**
+     *  actLisObj: object which implements action listener
+     * @param text
+     * @param state
+     * @param actLisObj
+     * @param xpos
+     * @param ypos
+     * @param width
+     * @param height
+     * @return
+     */
     public static JRadioButton setupJRadioButtonAndGet(String text, boolean state, Object actLisObj, int xpos, int ypos, int width, int height) {
         JRadioButton tmpJRB = new JRadioButton(text, state);
         tmpJRB.setBounds(xpos, ypos, width, height);
@@ -111,17 +185,44 @@ public class Java_Swing_Library {
         return tmpJRB;
     } // end of setupJRadioButtonAndGet
 
+    /**
+     * 
+     * @return
+     */
     public static ButtonGroup setupButtonGroupAndGet() {
         ButtonGroup tmpBG = new ButtonGroup();
         return tmpBG;
     } // end of setupButtonGroupAndGet
 
+    /**
+     * 
+     * @param xpos
+     * @param ypos
+     * @param width
+     * @param height
+     * @return
+     */
     public static JPasswordField setupJPasswordFieldAndGet(int xpos, int ypos, int width, int height) {
         JPasswordField tmpJPF = new JPasswordField();
         tmpJPF.setBounds(xpos, ypos, width, height);
         return tmpJPF;
     } // end of setupJPasswordFieldAndGet
 
+    /**
+     * 
+     * @param text
+     * @param rows
+     * @param columns
+     * @param setEditableFlag
+     * @param setLineWrapFlag
+     * @param setWrapStyleWordFlag
+     * @param setBoundsFlag
+     * @param xpos
+     * @param ypos
+     * @param width
+     * @param height
+     * @return
+     */
     public static JTextArea setupJTextAreaAndGet(String text, int rows, int columns, boolean setEditableFlag, boolean setLineWrapFlag, boolean setWrapStyleWordFlag, boolean setBoundsFlag, int xpos, int ypos, int width, int height) {
         JTextArea tmpJTA = new JTextArea(text, rows, columns);
         tmpJTA.setEditable(setEditableFlag);
@@ -133,12 +234,35 @@ public class Java_Swing_Library {
         return tmpJTA;
     } // end of setupJTextAreaAndGet
 
+    /**
+     * 
+     * @param jta
+     * @param xpos
+     * @param ypos
+     * @param width
+     * @param height
+     * @return
+     */
     public static JScrollPane setupScrollableJTextAreaAndGet(JTextArea jta, int xpos, int ypos, int width, int height) {
         JScrollPane tmpJSP = new JScrollPane(jta);
         tmpJSP.setBounds(xpos, ypos, width, height);
         return tmpJSP;
     } // end of setupScrollableJTextAreaAndGet
 
+    /**
+     * 
+     * @param lm
+     * @param selectionMode
+     * @param visibleRowCount
+     * @param initialSelectedIndex
+     * @param listSelLisObj
+     * @param setBoundsFlag
+     * @param xpos
+     * @param ypos
+     * @param width
+     * @param height
+     * @return
+     */
     public static JList<String> setupJListAndGet(ListModel<String> lm, int selectionMode, int visibleRowCount, int initialSelectedIndex, Object listSelLisObj, boolean setBoundsFlag, int xpos, int ypos, int width, int height) {
         JList<String> tmpJList = new JList<String>(lm);
         tmpJList.setSelectionMode(selectionMode);
@@ -153,12 +277,33 @@ public class Java_Swing_Library {
         return tmpJList;
     } // end of setupJListAndGet
 
+    /**
+     * 
+     * @param jlist
+     * @param xpos
+     * @param ypos
+     * @param width
+     * @param height
+     * @return
+     */
     public static JScrollPane setupScrollableJListAndGet(JList jlist, int xpos, int ypos, int width, int height) {
         JScrollPane tmpJSP = new JScrollPane(jlist);
         tmpJSP.setBounds(xpos, ypos, width, height);
         return tmpJSP;
     } // end of setupScrollableJListAndGet
 
+    /**
+     * 
+     * @param cbm
+     * @param initialSelectedIndex
+     * @param actLisObj
+     * @param setBoundsFlag
+     * @param xpos
+     * @param ypos
+     * @param width
+     * @param height
+     * @return
+     */
     public static JComboBox<String> setupJComboBoxAndGet(ComboBoxModel<String> cbm, int initialSelectedIndex, Object actLisObj, boolean setBoundsFlag, int xpos, int ypos, int width, int height) {
         JComboBox<String> tmpJComboBox = new JComboBox<String>(cbm);
         if (initialSelectedIndex >= 0) {
@@ -171,6 +316,21 @@ public class Java_Swing_Library {
         return tmpJComboBox;
     } // end of setupJComboBoxAndGet
 
+    /**
+     * 
+     * @param orientation
+     * @param min
+     * @param max
+     * @param initialVal
+     * @param borderPaintedFlag
+     * @param stringPaintedFlag
+     * @param setBoundsFlag
+     * @param xpos
+     * @param ypos
+     * @param width
+     * @param height
+     * @return
+     */
     public static JProgressBar setupJProgressBarAndGet(int orientation, int min, int max, int initialVal, boolean borderPaintedFlag, boolean stringPaintedFlag, boolean setBoundsFlag, int xpos, int ypos, int width, int height) {
         JProgressBar tmpJPB = new JProgressBar(orientation, min, max);
         tmpJPB.setValue(initialVal);
@@ -182,6 +342,24 @@ public class Java_Swing_Library {
         return tmpJPB;
     } // end of setupJProgressBarAndGet
 
+    /**
+     * 
+     * @param orientation
+     * @param min
+     * @param max
+     * @param initialVal
+     * @param minorTickSpacing
+     * @param majorTickSpacing
+     * @param paintTicksFlag
+     * @param paintLabelsFlag
+     * @param changeLisObj
+     * @param setBoundsFlag
+     * @param xpos
+     * @param ypos
+     * @param width
+     * @param height
+     * @return
+     */
     public static JSlider setupJSliderAndGet(int orientation, int min, int max, int initialVal, int minorTickSpacing, int majorTickSpacing, boolean paintTicksFlag, boolean paintLabelsFlag, Object changeLisObj, boolean setBoundsFlag, int xpos, int ypos, int width, int height) {
         JSlider tmpJS = new JSlider(orientation, min, max, initialVal);
         tmpJS.setMinorTickSpacing(minorTickSpacing);
@@ -195,6 +373,18 @@ public class Java_Swing_Library {
         return tmpJS;
     } // end of setupJSliderAndGet
 
+    /**
+     * 
+     * @param rootNode
+     * @param selectionMode
+     * @param treeSelLisObj
+     * @param setBoundsFlag
+     * @param xpos
+     * @param ypos
+     * @param width
+     * @param height
+     * @return
+     */
     public static JTree setupJTreeAndGet(DefaultMutableTreeNode rootNode, int selectionMode, Object treeSelLisObj, boolean setBoundsFlag, int xpos, int ypos, int width, int height) {
         JTree tmpJTree = new JTree(rootNode);
         tmpJTree.getSelectionModel().setSelectionMode(selectionMode);
@@ -205,12 +395,32 @@ public class Java_Swing_Library {
         return tmpJTree;
     } // end of setupJTreeAndGet
 
+    /**
+     * 
+     * @param jtree
+     * @param xpos
+     * @param ypos
+     * @param width
+     * @param height
+     * @return
+     */
     public static JScrollPane setupScrollableJTreeAndGet(JTree jtree, int xpos, int ypos, int width, int height) {
         JScrollPane tmpJSP = new JScrollPane(jtree);
         tmpJSP.setBounds(xpos, ypos, width, height);
         return tmpJSP;
     } // end of setupScrollableJTreeAndGet
 
+    /**
+     * 
+     * @param sm
+     * @param editableFlag
+     * @param spinnerChangeLisObj
+     * @param xpos
+     * @param ypos
+     * @param width
+     * @param height
+     * @return
+     */
     public static JSpinner setupJSpinnerAndGet(SpinnerModel sm, boolean editableFlag, Object spinnerChangeLisObj, int xpos, int ypos, int width, int height) {
         JSpinner tmpJSPN = new JSpinner(sm);
         tmpJSPN.addChangeListener((ChangeListener) spinnerChangeLisObj);
@@ -226,6 +436,18 @@ public class Java_Swing_Library {
         return tmpJSPN;
     } // end of setupJSpinnerAndGet
 
+    /**
+     * 
+     * @param initialColor
+     * @param borderTitleFlag
+     * @param borderTitle
+     * @param colorChooserChangeLisObj
+     * @param xpos
+     * @param ypos
+     * @param width
+     * @param height
+     * @return
+     */
     public static JColorChooser setupJColorChooserAndGet(Color initialColor, boolean borderTitleFlag, String borderTitle, Object colorChooserChangeLisObj, int xpos, int ypos, int width, int height) {
         JColorChooser tmpJCC = new JColorChooser(initialColor);
         tmpJCC.getSelectionModel().addChangeListener((ChangeListener) colorChooserChangeLisObj);
@@ -236,6 +458,15 @@ public class Java_Swing_Library {
         return tmpJCC;
     } // end of setupJColorChooserAndGet
 
+    /**
+     * 
+     * @param owner
+     * @param title
+     * @param modal
+     * @param width
+     * @param height
+     * @return
+     */
     public static JDialog setupJDialogAndGet(Frame owner, String title, boolean modal, int width, int height) {
         JDialog tmpJD = new JDialog(owner, title, modal);
         tmpJD.setSize(width, height);
@@ -245,6 +476,17 @@ public class Java_Swing_Library {
         return tmpJD;
     } // end of setupJDialogAndGet
 
+    /**
+     * 
+     * @param owner
+     * @param title
+     * @param modal
+     * @param dialogWidth
+     * @param dialogHeight
+     * @param panelWidth
+     * @param panelHeight
+     * @return
+     */
     public static ArrayList<Object> setupScrollableJDialogAndGetDialogAndPanel(Frame owner, String title, boolean modal, int dialogWidth, int dialogHeight, int panelWidth, int panelHeight) {
         JDialog tmpJD = new JDialog(owner, title, modal);
         tmpJD.setSize(dialogWidth, dialogHeight);
@@ -269,6 +511,19 @@ public class Java_Swing_Library {
         return tmpA;
     } // end of setupScrollableJDialogAndGetDialogAndPanel
 
+    /**
+     * 
+     * @param text
+     * @param itemLisObj
+     * @param opaque
+     * @param bgcolor
+     * @param setBoundsFlag
+     * @param xpos
+     * @param ypos
+     * @param width
+     * @param height
+     * @return
+     */
     public static JToggleButton setupJToggleButtonAndGet(String text, Object itemLisObj, boolean opaque, Color bgcolor, boolean setBoundsFlag, int xpos, int ypos, int width, int height) {
         JToggleButton tmpJTB = new JToggleButton(text);
         if (setBoundsFlag == true) {
@@ -280,6 +535,17 @@ public class Java_Swing_Library {
         return tmpJTB;
     } // end of setupJToggleButtonAndGet
 
+    /**
+     * 
+     * @param orientation
+     * @param bgcolor
+     * @param setBoundsFlag
+     * @param xpos
+     * @param ypos
+     * @param width
+     * @param height
+     * @return
+     */
     public static JSeparator setupJSeparatorAndGet(int orientation, Color bgcolor, boolean setBoundsFlag, int xpos, int ypos, int width, int height) {
         JSeparator tmpJS = new JSeparator(orientation);
         tmpJS.setBackground(bgcolor);
@@ -289,6 +555,12 @@ public class Java_Swing_Library {
         return tmpJS;
     } // end of setupJSeparatorAndGet
 
+    /**
+     * 
+     * @param fgcolor
+     * @param bgcolor
+     * @return
+     */
     public static JMenuBar setupJMenuBarAndGet(Color fgcolor, Color bgcolor) {
         JMenuBar tmpJMB = new JMenuBar();
         tmpJMB.setOpaque(true);
@@ -297,6 +569,13 @@ public class Java_Swing_Library {
         return tmpJMB;
     } // end of setupJMenuBarAndGet
 
+    /**
+     * 
+     * @param text
+     * @param fgcolor
+     * @param bgcolor
+     * @return
+     */
     public static JMenu setupJMenuAndGet(String text, Color fgcolor, Color bgcolor) {
         JMenu tmpJM = new JMenu(text);
         tmpJM.setOpaque(true);
@@ -305,6 +584,15 @@ public class Java_Swing_Library {
         return tmpJM;
     } // end of setupJMenuAndGet
 
+    /**
+     * 
+     * @param text
+     * @param actLisObj
+     * @param k
+     * @param fgcolor
+     * @param bgcolor
+     * @return
+     */
     public static JMenuItem setupJMenuItemAndGet(String text, Object actLisObj, KeyStroke k, Color fgcolor, Color bgcolor) {
         JMenuItem tmpJMI = new JMenuItem(text);
         tmpJMI.setOpaque(true);
