@@ -1,3 +1,4 @@
+/*
 package fr.eseo.e3.poo.projet.blox.modele.main;
 
 import java.awt.Color;
@@ -6,6 +7,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
+
+//TODO Remove ?!!!!!
 
 public class GamePanel extends JPanel implements Runnable{
 	
@@ -49,3 +52,5 @@ public class GamePanel extends JPanel implements Runnable{
 		
 	}
 }
+
+ */

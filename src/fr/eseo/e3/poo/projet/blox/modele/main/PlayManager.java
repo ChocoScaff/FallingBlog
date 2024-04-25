@@ -1,3 +1,4 @@
+/*
 package fr.eseo.e3.poo.projet.blox.modele.main;
 
 import java.awt.*;
@@ -45,6 +46,7 @@ public class PlayManager {
 		
 	}
 }
+ */
 
 
 	

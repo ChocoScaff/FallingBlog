@@ -1,3 +1,4 @@
+/*
 package fr.eseo.e3.poo.projet.blox.modele.main;
 
 import javax.swing.*;
@@ -318,3 +319,6 @@ public class Java_Swing_Library {
     } // end of setupJMenuItemAndGet
 
 } // end of Java_Swing_Library
+
+
+ */
