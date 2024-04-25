@@ -6,7 +6,6 @@ import javax.swing.*;
 public class VuePuits extends JPanel {
     public VuePuits()
     {
-        this.setBounds(0, 0, 100, 100);
         this.setBackground(Color.BLUE);
     }
 
