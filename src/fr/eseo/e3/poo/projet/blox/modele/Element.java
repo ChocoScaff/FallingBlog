@@ -1,5 +1,7 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
+import java.util.Objects;
+
 public class Element {
 	
 	private Coordonnees coordonnees;
@@ -77,5 +79,34 @@ public class Element {
 	public void setCouleur(Couleur couleur) {
 		this.couleur = couleur;
 	}
+	
+	/**
+	 * 	Override toString() method
+	 * 
+	 * @return
+	 */
+    public String toString() {
+        return "(" + this.coordonnees + ", " + this.couleur + ")";
+    }
+    
+    /**
+     * Override equals() method
+     */
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Element element = (Element) obj;
+        return Objects.equals(coordonnees, element.coordonnees) &&
+               Objects.equals(couleur, element.couleur);
+    }
+    
+    /**
+     * Override hashCode() method
+     * 
+     * @return
+     */
+    public int hashCode() {
+        return Objects.hash(this.couleur, this.coordonnees);
+    }
 	
 }
