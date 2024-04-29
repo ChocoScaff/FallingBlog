@@ -78,7 +78,7 @@ public class Puits {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param largeur
 	 */
 	public void setLargeur(int largeur) {
