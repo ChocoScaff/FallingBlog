@@ -5,9 +5,10 @@ import java.awt.*;
 import javax.swing.*;
 
 public class VuePuits extends JPanel {
+    private final int taille;
     private Puits puits;
 
-    public static final int TAILLE_PAR_DEFAUT = 400; // assuming a default size
+    public static final int TAILLE_PAR_DEFAUT = 700; // assuming a default size
 
     public VuePuits(Puits puits) {
         this(puits, TAILLE_PAR_DEFAUT);
@@ -15,6 +16,7 @@ public class VuePuits extends JPanel {
 
     public VuePuits(Puits puits, int taille) {
         this.puits = puits;
+        this.taille = taille;
         this.setPreferredSize(new Dimension(taille, taille));
         this.setBackground(Color.WHITE);
     }
@@ -27,10 +29,10 @@ public class VuePuits extends JPanel {
         Graphics2D g2D = (Graphics2D) g.create();
 
         // Drawing a light gray grid
-        g2D.setColor(Color.GRAY);
-        int tileSize = this.getTaille() / puits.getProfondeur();
-        for (int x = 0; x < puits.getLargeur()*tileSize; x += tileSize) {
-            for (int y = 0; y < puits.getProfondeur()*tileSize; y += tileSize) {
+        g2D.setColor(Color.LIGHT_GRAY);
+        int tileSize = (this.getTaille() - 40) / puits.getProfondeur();
+        for (int x = 20; x < puits.getLargeur()*tileSize; x += tileSize) {
+            for (int y = 20; y < puits.getProfondeur()*tileSize; y += tileSize) {
                 g2D.drawRect(x, y, tileSize, tileSize);
             }
         }
@@ -48,7 +50,7 @@ public class VuePuits extends JPanel {
     }
 
     public int getTaille() {
-        return this.getWidth(); // or getHeight(), depending on which represents the "taille"
+        return this.taille;
     }
 
     public void setTaille(int taille) {
@@ -59,7 +61,7 @@ public class VuePuits extends JPanel {
     public void DisplayPuits() {
         JFrame frame = new JFrame("Simple Tetris");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(true);
+        frame.setResizable(false);
 
         frame.setSize(new Dimension(puits.getLargeur(), puits.getProfondeur()));
         frame.add(this);

@@ -1,8 +1,8 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
 public class Puits {
-	private static final int LARGEUR_PAR_DEFAULT = 36;
-	private static final int PROFONDEUR_PAR_DEFAULT = 60;
+	private static final int LARGEUR_PAR_DEFAULT = 10;
+	private static final int PROFONDEUR_PAR_DEFAULT = 20;
 
 	private int largeur;
 	private int profondeur;
