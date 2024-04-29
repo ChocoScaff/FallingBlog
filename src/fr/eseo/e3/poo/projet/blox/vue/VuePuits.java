@@ -10,10 +10,19 @@ public class VuePuits extends JPanel {
 
     public static final int TAILLE_PAR_DEFAUT = 700; // assuming a default size
 
+    /**
+     *
+     * @param puits
+     */
     public VuePuits(Puits puits) {
         this(puits, TAILLE_PAR_DEFAUT);
     }
 
+    /**
+     *
+     * @param puits
+     * @param taille
+     */
     public VuePuits(Puits puits, int taille) {
         this.puits = puits;
         this.taille = taille;
@@ -21,6 +30,10 @@ public class VuePuits extends JPanel {
         this.setBackground(Color.WHITE);
     }
 
+    /**
+     *
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); // This will fill the background with the set color (white)
@@ -40,24 +53,43 @@ public class VuePuits extends JPanel {
         g2D.dispose(); // Free up the graphics object resources
     }
 
+    /**
+     *
+     * @return
+     */
     public Puits getPuits() {
         return puits;
     }
 
+    /**
+     *
+     * @param puits
+     */
     public void setPuits(Puits puits) {
         this.puits = puits;
         repaint();
     }
 
+    /**
+     *
+     * @return
+     */
     public int getTaille() {
         return this.taille;
     }
 
+    /**
+     *
+     * @param taille
+     */
     public void setTaille(int taille) {
         this.setPreferredSize(new Dimension(taille, this.getPreferredSize().height));
         this.revalidate();
     }
 
+    /**
+     *
+     */
     public void DisplayPuits() {
         JFrame frame = new JFrame("Simple Tetris");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
