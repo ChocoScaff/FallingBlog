@@ -15,15 +15,25 @@ public class UsineDePiece {
 
     private Mode mode;
 
-
+    /**
+     *
+     */
     public UsineDePiece() {
 
     }
 
+    /**
+     *
+     * @param mode
+     */
     public void setMode(Mode mode) {
         this.mode = mode;
     }
 
+    /**
+     *
+     * @return
+     */
     public Piece genererPiece() {
 
         if (this.mode == Mode.ALEATOIRE_COMPLET)
@@ -32,5 +42,6 @@ public class UsineDePiece {
             return null;
         else if (this.mode == Mode.CYCLIC)
             return null;
+        return null;
     }
 }
