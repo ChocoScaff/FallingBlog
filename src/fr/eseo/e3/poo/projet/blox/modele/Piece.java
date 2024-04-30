@@ -92,4 +92,21 @@ abstract public class Piece {
 
 		this.element.setCoordonnes(coor);
 	}
+
+	/**
+	 *
+	 * @param sensHorraire
+	 */
+	public void tourner(boolean sensHorraire) {
+
+		Coordonnees coor = this.element.getCoordonnes();
+		int abs = coor.getAbscisse();
+		int ord = coor.getOrdonnee();
+
+
+		int newX = (int) (abs * Math.cos(90) - abs * Math.sin(90));
+		int newY = (int) (ord * Math.sin(90) + ord * Math.cos(90));
+
+		deplacerDe(newX,newY);
+	}
 }
