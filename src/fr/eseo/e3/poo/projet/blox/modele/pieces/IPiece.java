@@ -3,7 +3,8 @@ package fr.eseo.e3.poo.projet.blox.modele.pieces;
 import fr.eseo.e3.poo.projet.blox.modele.*;
 
 public class IPiece extends Piece {
-		
+
+
 		/**
 		 * 
 		 * @param coordonnees
