@@ -25,8 +25,8 @@ public class VuePuitsTest {
         frame.setResizable(true);
 
         frame.setSize(new Dimension(puits.getLargeur(), puits.getProfondeur()));
-        frame.add(vuePuits);
         frame.add(vuePiece);
+        frame.add(vuePuits);
         frame.pack();
 
         frame.setLocationRelativeTo(null);
