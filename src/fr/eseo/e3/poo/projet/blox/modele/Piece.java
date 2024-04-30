@@ -74,5 +74,22 @@ abstract public class Piece {
     public void setPuits(Puits puits) {
         this.puits = puits;
     }
-	
+
+	/**
+	 *
+	 * @param deltaX
+	 * @param deltaY
+	 */
+	public void deplacerDe(int deltaX, int deltaY) {
+		Coordonnees coor = this.element.getCoordonnes();
+		int abs = coor.getAbscisse();
+		abs = abs + deltaX;
+		coor.setAbscisse(abs);
+
+		int ord = coor.getOrdonnee();
+		ord = ord + deltaY;
+		coor.setOrdonnee(ord);
+
+		this.element.setCoordonnes(coor);
+	}
 }
