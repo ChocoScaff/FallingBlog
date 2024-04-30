@@ -14,8 +14,9 @@ abstract public class Piece {
 	 * @param couleur
 	 */
 	public Piece(Coordonnees coordonnees, Couleur couleur) {
-		
-    	this.element.setCoordonnes(coordonnees);
+
+
+    	this.element = new Element(coordonnees, couleur);
 		this.couleur = couleur;
 	}
 	
