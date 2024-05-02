@@ -22,10 +22,13 @@ public class VuePiece extends JPanel {
     protected void afficherPiece(Graphics2D g2D, int tileSize) {
         Color color = teinte(new Color(255, 0, 0)); // Example color
         g2D.setColor(color);
+        int abs = this.piece.getElements().getCoordonnes().getAbscisse();
+        int ord = this.piece.getElements().getCoordonnes().getOrdonnee();
+
         for(int row = 0; row < this.piece.getDimension().length; row += 1){
             for(int col = 0; col < this.piece.getDimension()[row].length; col += 1){
                 if(this.piece.getDimension()[row][col] == 1){
-                    g2D.fill3DRect(row * tileSize + 20,col * tileSize + 20, tileSize, tileSize, true);
+                    g2D.fill3DRect((row + abs) * tileSize + 20,(col + ord) * tileSize + 20, tileSize, tileSize, true);
                 }
             }
         }
