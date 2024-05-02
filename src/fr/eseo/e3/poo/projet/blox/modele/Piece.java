@@ -101,15 +101,19 @@ abstract public class Piece {
 	 */
 	public void tourner(boolean sensHorraire) {
 
-		Coordonnees coor = this.element.getCoordonnes();
-		int abs = coor.getAbscisse();
-		int ord = coor.getOrdonnee();
+		int[][] piece = this.dimension;
 
+		int numRows = piece.length;
+		int numCols = piece[0].length;
+		int[][] rotatedPiece = new int[numCols][numRows];
 
-		int newX = (int) (abs * Math.cos(3.14/2) - abs * Math.sin(3.14/2));
-		int newY = (int) (ord * Math.sin(3.14/2) + ord * Math.cos(3.14/2));
+		for (int row = 0; row < numRows; row++) {
+			for (int col = 0; col < numCols; col++) {
+				rotatedPiece[col][numRows - 1 - row] = piece[row][col];
+			}
+		}
 
-		deplacerDe(newX,newY);
+		this.dimension = rotatedPiece;
 	}
 
 
