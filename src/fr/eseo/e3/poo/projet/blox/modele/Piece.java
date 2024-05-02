@@ -7,7 +7,9 @@ abstract public class Piece {
 	private Couleur couleur;
     private Puits puits;
     private Element element;
-	
+	private int[][] dimension;
+
+
 	/**
 	 * 
 	 * @param coordonnees
@@ -108,5 +110,14 @@ abstract public class Piece {
 		int newY = (int) (ord * Math.sin(90) + ord * Math.cos(90));
 
 		deplacerDe(newX,newY);
+	}
+
+
+	/**
+	 *
+	 * @return
+	 */
+	public int[][] getDimension () {
+		return this.dimension;
 	}
 }

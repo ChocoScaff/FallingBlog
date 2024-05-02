@@ -18,7 +18,7 @@ public class OPiece extends Piece {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public int[][] getDimension () {
