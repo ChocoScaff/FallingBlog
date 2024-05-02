@@ -13,7 +13,7 @@ public class VuePuitsTest {
         // Create coordinates and a piece
         Coordonnees coordonnees = new Coordonnees(4,2);
         LPiece Piece = new LPiece(coordonnees, Couleur.ROUGE); // Assuming OPiece accepts Coordonnees and Color
-        Piece.tourner(true);
+        //Piece.tourner(true);
         puits.setPieceSuivante(Piece); // Assuming setPieceSuivante is a method to set the next piece in Puits
 
         // Create VuePuits and VuePiece
