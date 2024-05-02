@@ -28,7 +28,7 @@ abstract public class Piece {
 	 * @param couleur
 	 */
 	protected void setElements(Coordonnees coordonnees, Couleur couleur) {
-		
+
     	Element element = new Element(coordonnees, couleur);
 	    this.element = element;
 	}
@@ -37,8 +37,8 @@ abstract public class Piece {
 	 *  Get elements
 	 * @return
 	 */
-	public List<Element> getElements() {
-		return (List<Element>) element;
+	public Element getElements() {
+		return this.element;
 	}
 	
 	/**
@@ -106,8 +106,8 @@ abstract public class Piece {
 		int ord = coor.getOrdonnee();
 
 
-		int newX = (int) (abs * Math.cos(90) - abs * Math.sin(90));
-		int newY = (int) (ord * Math.sin(90) + ord * Math.cos(90));
+		int newX = (int) (abs * Math.cos(3.14/2) - abs * Math.sin(3.14/2));
+		int newY = (int) (ord * Math.sin(3.14/2) + ord * Math.cos(3.14/2));
 
 		deplacerDe(newX,newY);
 	}
