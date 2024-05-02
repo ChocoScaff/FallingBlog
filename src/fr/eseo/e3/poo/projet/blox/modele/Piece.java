@@ -7,7 +7,7 @@ abstract public class Piece {
 	private Couleur couleur;
     private Puits puits;
     private Element element;
-	private int[][] dimension;
+	public int[][] dimension;
 
 
 	/**
@@ -100,40 +100,23 @@ abstract public class Piece {
 	 *
 	 * @param sensHorraire
 	 */
-	public void tourner(boolean sensHorraire) {
+	public void rotation() {
 
-		printMatrix();
-		transpose();
-		printMatrix();
-		reverseColumns();
-		printMatrix();
-	}
+		int rows = this.dimension.length;    // Number of rows in the original matrix
+		int cols = this.dimension[0].length; // Number of columns in the original matrix
 
-	/**
-	 *
-	 */
-	private void reverseColumns()
-	{
-		for (int i = 0; i < this.dimension[0].length; i++)
-			for (int j = 0, k = this.dimension[0].length - 1; j < k;
-				 j++, k--) {
-				int temp = this.dimension[j][i];
-				this.dimension[j][i] = this.dimension[k][i];
-				this.dimension[k][i] = temp;
+		// New matrix with inverted dimensions
+		int[][] rotatedMatrix = new int[cols][rows];
+
+		// Rotate the matrix
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++) {
+				rotatedMatrix[j][rows - 1 - i] = this.dimension[i][j];
 			}
-	}
+		}
 
-	/**
-	 *
-	 */
-	private void transpose()
-	{
-		for (int i = 0; i < this.dimension.length; i++)
-			for (int j = i; j < this.dimension[0].length; j++) {
-				int temp = this.dimension[j][i];
-				this.dimension[j][i] = this.dimension[i][j];
-				this.dimension[i][j] = temp;
-			}
+		// Update the dimension array to the rotated matrix
+		this.dimension = rotatedMatrix;
 	}
 
 	/**
@@ -144,15 +127,4 @@ abstract public class Piece {
 		return this.dimension;
 	}
 
-	/**
-	 *
-	 */
-	private void printMatrix()
-	{
-		for (int i = 0; i < this.dimension.length; i++) {
-			for (int j = 0; j < this.dimension[0].length; j++)
-				System.out.print(this.dimension[i][j] + " ");
-			System.out.println("");
-		}
-	}
 }
