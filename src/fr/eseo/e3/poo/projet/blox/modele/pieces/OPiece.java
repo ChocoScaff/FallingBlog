@@ -4,7 +4,7 @@ import fr.eseo.e3.poo.projet.blox.modele.*;
 
 public class OPiece extends Piece {
 
-	private int[][] dimension;
+	public int[][] dimension;
 
 	/**
 	 * 
@@ -14,15 +14,8 @@ public class OPiece extends Piece {
 	public OPiece(Coordonnees coordonnees, Couleur couleur) {
 		super(coordonnees, couleur);
 
-		this.dimension = new int[][] {{1, 1}, {1, 1}};		// TODO Auto-generated constructor stub
+		super.dimension = new int[][] {{1, 1}, {1, 1}};		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 *
-	 * @return
-	 */
-	public int[][] getDimension () {
-		return this.dimension;
-	}
 
 }
