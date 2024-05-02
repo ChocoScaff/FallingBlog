@@ -20,6 +20,7 @@ abstract public class Piece {
 
     	this.element = new Element(coordonnees, couleur);
 		this.couleur = couleur;
+		this.dimension = new int[][]{{0, 1, 0}, {0, 1, 0}, {1, 1, 0}};
 	}
 	
 	/**
@@ -101,21 +102,39 @@ abstract public class Piece {
 	 */
 	public void tourner(boolean sensHorraire) {
 
-		int[][] piece = this.dimension;
-
-		int numRows = piece.length;
-		int numCols = piece[0].length;
-		int[][] rotatedPiece = new int[numCols][numRows];
-
-		for (int row = 0; row < numRows; row++) {
-			for (int col = 0; col < numCols; col++) {
-				rotatedPiece[col][numRows - 1 - row] = piece[row][col];
-			}
-		}
-
-		this.dimension = rotatedPiece;
+		printMatrix();
+		transpose();
+		printMatrix();
+		reverseColumns();
+		printMatrix();
 	}
 
+	/**
+	 *
+	 */
+	private void reverseColumns()
+	{
+		for (int i = 0; i < this.dimension[0].length; i++)
+			for (int j = 0, k = this.dimension[0].length - 1; j < k;
+				 j++, k--) {
+				int temp = this.dimension[j][i];
+				this.dimension[j][i] = this.dimension[k][i];
+				this.dimension[k][i] = temp;
+			}
+	}
+
+	/**
+	 *
+	 */
+	private void transpose()
+	{
+		for (int i = 0; i < this.dimension.length; i++)
+			for (int j = i; j < this.dimension[0].length; j++) {
+				int temp = this.dimension[j][i];
+				this.dimension[j][i] = this.dimension[i][j];
+				this.dimension[i][j] = temp;
+			}
+	}
 
 	/**
 	 *
@@ -123,5 +142,17 @@ abstract public class Piece {
 	 */
 	public int[][] getDimension () {
 		return this.dimension;
+	}
+
+	/**
+	 *
+	 */
+	private void printMatrix()
+	{
+		for (int i = 0; i < this.dimension.length; i++) {
+			for (int j = 0; j < this.dimension[0].length; j++)
+				System.out.print(this.dimension[i][j] + " ");
+			System.out.println("");
+		}
 	}
 }
