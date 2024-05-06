@@ -17,5 +17,11 @@ public class OPiece extends Piece {
 		super.dimension = new int[][] {{1, 1}, {1, 1}};		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public void tourner(boolean sensHoraire) {
+
+		//Do nothing because OPiece cannot rotate
+	}
+
 
 }

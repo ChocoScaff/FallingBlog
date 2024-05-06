@@ -100,7 +100,7 @@ abstract public class Piece {
 	 *
 	 * @param sensHorraire
 	 */
-	public void rotation() {
+	public void tourner(boolean sensHorraire) {
 
 		int rows = this.dimension.length;    // Number of rows in the original matrix
 		int cols = this.dimension[0].length; // Number of columns in the original matrix
@@ -108,10 +108,19 @@ abstract public class Piece {
 		// New matrix with inverted dimensions
 		int[][] rotatedMatrix = new int[cols][rows];
 
-		// Rotate the matrix
-		for (int i = 0; i < rows; i++) {
-			for (int j = 0; j < cols; j++) {
-				rotatedMatrix[j][rows - 1 - i] = this.dimension[i][j];
+		if(sensHorraire) {
+			// Rotate the matrix CW
+			for (int i = 0; i < rows; i++) {
+				for (int j = 0; j < cols; j++) {
+					rotatedMatrix[j][rows - 1 - i] = this.dimension[i][j];
+				}
+			}
+		} else {
+			// Rotate the matrix CCW
+			for (int i = 0; i < rows; i++) {
+				for (int j = 0; j < cols; j++) {
+					rotatedMatrix[cols - 1 - j][i] = this.dimension[i][j];
+				}
 			}
 		}
 
