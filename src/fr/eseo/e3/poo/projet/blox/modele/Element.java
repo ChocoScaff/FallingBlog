@@ -21,8 +21,7 @@ public class Element {
 	 * @param ordonnee
 	 */
 	public Element(int abscisse, int ordonnee) {
-		this.coordonnees.setAbscisse(abscisse);
-		this.coordonnees.setOrdonnee(ordonnee);
+		this.coordonnees = new Coordonnees(abscisse,ordonnee);
 	}
 	
 	/**
@@ -42,8 +41,7 @@ public class Element {
 	 * @param couleur
 	 */
 	public Element(int abscisse, int ordonnee, Couleur couleur) {
-		this.coordonnees.setAbscisse(abscisse);
-		this.coordonnees.setOrdonnee(ordonnee);
+		this.coordonnees = new Coordonnees(abscisse,ordonnee);
 		this.couleur = couleur;
 		
 	}
@@ -86,7 +84,7 @@ public class Element {
 	 * @return
 	 */
     public String toString() {
-        return "(" + this.coordonnees + ", " + this.couleur + ")";
+        return this.coordonnees + ", " + this.couleur;
     }
     
     /**
