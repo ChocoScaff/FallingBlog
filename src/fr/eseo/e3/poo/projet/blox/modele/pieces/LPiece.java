@@ -7,10 +7,21 @@ import fr.eseo.e3.poo.projet.blox.modele.Piece;
 
 
 public class LPiece extends Piece {
-	public LPiece(Coordonnees referenceCoordonnees, Couleur couleur) {
-		super(referenceCoordonnees, couleur);
+
+	/**
+	 *
+	 * @param coordonnees
+	 * @param couleur
+	 */
+	public LPiece(Coordonnees coordonnees, Couleur couleur) {
+		super(coordonnees, couleur);
 	}
 
+	/**
+	 *
+	 * @param coordonnees
+	 * @param couleur
+	 */
 	protected void setElements(Coordonnees coordonnees, Couleur couleur) {
 		elements.add(new Element(coordonnees, couleur));
 		elements.add(new Element(new Coordonnees(coordonnees.getAbscisse() - 1, coordonnees.getOrdonnee()), couleur));
