@@ -5,6 +5,8 @@ import java.awt.*;
 import java.util.List;
 import javax.swing.*;
 
+import static fr.eseo.e3.poo.projet.blox.vue.VuePuits.MARGE;
+
 public class VuePiece extends JPanel {
     public static final double MULTIPLIER_TEINTE = 0.3;
     private final Piece piece;
@@ -33,7 +35,7 @@ public class VuePiece extends JPanel {
             int abs = element.getCoordonnes().getAbscisse();
             int ord = element.getCoordonnes().getOrdonnee();
 
-            g2D.fill3DRect(abs * tileSize + 20,ord * tileSize + 20, tileSize, tileSize, true);
+            g2D.fill3DRect(abs * tileSize + MARGE,ord * tileSize + MARGE, tileSize, tileSize, true);
         }
 
 

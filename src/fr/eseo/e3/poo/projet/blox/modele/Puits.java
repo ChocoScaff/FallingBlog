@@ -9,7 +9,8 @@ public class Puits {
 	private int largeur;
 	private int profondeur;
 
-	private Piece piece;
+	private Piece pieceActuelle;
+	private Piece pieceSuivante;
 
 	/**
 	 *
@@ -34,7 +35,7 @@ public class Puits {
 	 * @return
 	 */
 	public Piece getPieceActuelle() {
-		return this.piece;
+		return this.pieceActuelle;
 	}
 
 	/**
@@ -42,7 +43,7 @@ public class Puits {
 	 * @return
 	 */
 	public Piece getPieceSuivante() {
-		return this.piece;
+		return this.pieceSuivante;
 	}
 
 	/**
@@ -50,7 +51,14 @@ public class Puits {
 	 * @param piece
 	 */
 	public void setPieceSuivante(Piece piece) {
-		this.piece = piece;
+
+		if(this.pieceSuivante == null){
+			this.pieceSuivante = piece;
+		} else {
+			this.pieceActuelle = this.pieceSuivante;
+			this.pieceSuivante = piece;
+		}
+
 	}
 
 	/**
