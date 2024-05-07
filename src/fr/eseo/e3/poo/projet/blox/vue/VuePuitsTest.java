@@ -37,6 +37,7 @@ public class VuePuitsTest {
         Affichage(vuePuits);
 
         piece.deplacerDe(4, 0);
+        piece.tourner(true);
 
     }
 
