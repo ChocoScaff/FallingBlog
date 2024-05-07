@@ -1,17 +1,17 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
-import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import fr.eseo.e3.poo.projet.blox.modele.*;
 import java.awt.*;
 import javax.swing.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-public class VuePuits extends JPanel {
+public class VuePuits extends JPanel implements PropertyChangeListener {
     public static final int MARGE = 20;
-    private final int taille;
+    public static final int TAILLE_PAR_DEFAUT = 700;
+    private  final int taille;
     private Puits puits;
     private VuePiece vuePiece;
-
-
-    public static final int TAILLE_PAR_DEFAUT = 700;
 
     public VuePuits(Puits puits) {
         this(puits, TAILLE_PAR_DEFAUT);
@@ -20,8 +20,10 @@ public class VuePuits extends JPanel {
     public VuePuits(Puits puits, int taille) {
         this.puits = puits;
         this.taille = taille;
+        this.vuePiece = new VuePiece(puits.getPieceActuelle());
         setPreferredSize(new Dimension(taille, taille));
         setBackground(Color.WHITE);
+        this.puits.addPropertyChangeListener(this); // Listen to property changes
     }
 
     public VuePiece getVuePiece() {
@@ -51,6 +53,13 @@ public class VuePuits extends JPanel {
         g2D.dispose();
     }
 
+    @Override
+    public void propertyChange(PropertyChangeEvent event) {
+        if (Puits.MODIFICATION_PIECE_ACTUELLE.equals(event.getPropertyName())) {
+            setVuePiece(new VuePiece((Piece) event.getNewValue()));
+        }
+    }
+
     public int getTaille() {
         return taille;
     }
@@ -63,4 +72,5 @@ public class VuePuits extends JPanel {
         this.puits = puits;
         repaint();
     }
+
 }

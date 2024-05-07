@@ -1,14 +1,12 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 import fr.eseo.e3.poo.projet.blox.modele.*;
-import fr.eseo.e3.poo.projet.blox.modele.pieces.*;
 
 import javax.swing.*;
 import java.awt.*;
 
+
 public class VuePuitsTest {
-    private static void Affichage(VuePuits vuePuits, VuePiece vuePiece){
-        // Associate VuePiece with VuePuits
-        vuePuits.setVuePiece(vuePiece);
+    private static void Affichage(VuePuits vuePuits){
 
         // Create and setup the frame
         JFrame frame = new JFrame("Simple Tetris");
@@ -31,15 +29,15 @@ public class VuePuitsTest {
 
         // Create coordinates and a piece
         Piece piece = usineDePiece.genererPiece();
-        //piece.deplacerDe(0, 0);
-        //piece.tourner(false);
-        puits.setPieceSuivante(piece); // Assuming setPieceSuivante is a method to set the next piece in Puits
+        puits.setPieceSuivante(piece);
 
         // Create VuePuits and VuePiece
         VuePuits vuePuits = new VuePuits(puits);
-        VuePiece vuePiece = new VuePiece(piece);
 
-        Affichage(vuePuits,vuePiece);
+        Affichage(vuePuits);
+
+        piece.deplacerDe(4, 0);
 
     }
+
 }
