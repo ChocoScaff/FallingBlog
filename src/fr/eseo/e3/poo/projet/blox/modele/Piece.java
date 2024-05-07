@@ -1,65 +1,64 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 abstract public class Piece {
-
-	private Couleur couleur;
-    private Puits puits;
-    private Element element;
-	public int[][] dimension;
-
+	protected Puits puits;
+	protected List<Element> elements;
 
 	/**
-	 * 
+	 *
 	 * @param coordonnees
 	 * @param couleur
 	 */
 	public Piece(Coordonnees coordonnees, Couleur couleur) {
 
-
-    	this.element = new Element(coordonnees, couleur);
-		this.couleur = couleur;
-		this.dimension = new int[][]{{0, 1, 0}, {0, 1, 0}, {1, 1, 0}};
+		this.elements = new ArrayList<>();
+		setElements(coordonnees, couleur);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param coordonnees
 	 * @param couleur
 	 */
-	protected void setElements(Coordonnees coordonnees, Couleur couleur) {
-
-    	Element element = new Element(coordonnees, couleur);
-	    this.element = element;
-	}
+	protected abstract void setElements(Coordonnees coordonnees, Couleur couleur);
 
 	/**
 	 *  Get elements
 	 * @return
 	 */
-	public Element getElements() {
-		return this.element;
+	public List<Element> getElements() {
+		return Collections.unmodifiableList(elements);
 	}
-	
+
 	/**
 	 * Set position
 	 * @param abscisse
 	 * @param ordonnee
 	 */
     public void setPosition(int abscisse, int ordonnee) {
-    	
-    	Coordonnees coordonnees = new Coordonnees(abscisse, ordonnee);
-    	
-    	this.element.setCoordonnes(coordonnees);
+		Coordonnees ref = elements.get(0).getCoordonnes();
+		int deltaX = abscisse - ref.getAbscisse();
+		int deltaY = ordonnee - ref.getOrdonnee();
+		for (Element el : elements) {
+			Coordonnees coord = el.getCoordonnes();
+			el.setCoordonnes(new Coordonnees(coord.getAbscisse() + deltaX, coord.getOrdonnee() + deltaY));
+		}
     }
 
     /**
      * Override toString() method
      */
     public String toString() {
-        
-        return "(" + this.element + ", " + this.couleur +  ", " + this.puits + ")";
+		StringBuilder sb = new StringBuilder(this.getClass().getSimpleName() + " :\n");
+		for (Element element : elements) {
+			sb.append("\t").append(element.toString()).append("\n");
+		}
+		return sb.toString();
     }
 
     /**
@@ -84,16 +83,21 @@ abstract public class Piece {
 	 * @param deltaY
 	 */
 	public void deplacerDe(int deltaX, int deltaY) {
-		Coordonnees coor = this.element.getCoordonnes();
-		int abs = coor.getAbscisse();
-		abs = abs + deltaX;
-		coor.setAbscisse(abs);
 
-		int ord = coor.getOrdonnee();
-		ord = ord + deltaY;
-		coor.setOrdonnee(ord);
+		for (int i = 0; i < elements.size(); i++) {
+			Element element = elements.get(i);
 
-		this.element.setCoordonnes(coor);
+			Coordonnees coor = element.getCoordonnes();
+			int abs = coor.getAbscisse();
+			abs = abs + deltaX;
+			coor.setAbscisse(abs);
+
+			int ord = coor.getOrdonnee();
+			ord = ord + deltaY;
+			coor.setOrdonnee(ord);
+
+			element.setCoordonnes(coor);
+		}
 	}
 
 	/**
@@ -101,39 +105,27 @@ abstract public class Piece {
 	 * @param sensHorraire
 	 */
 	public void tourner(boolean sensHorraire) {
+		Coordonnees pivot = elements.get(0).getCoordonnes();  // Get pivot element's coordinates
+		int pivotX = pivot.getAbscisse();
+		int pivotY = pivot.getOrdonnee();
 
-		int rows = this.dimension.length;    // Number of rows in the original matrix
-		int cols = this.dimension[0].length; // Number of columns in the original matrix
+		for (Element element : elements) {
+			int x = element.getCoordonnes().getAbscisse() - pivotX;
+			int y = element.getCoordonnes().getOrdonnee() - pivotY;
 
-		// New matrix with inverted dimensions
-		int[][] rotatedMatrix = new int[cols][rows];
+            int newX;
+            int newY;
 
-		if(sensHorraire) {
-			// Rotate the matrix CW
-			for (int i = 0; i < rows; i++) {
-				for (int j = 0; j < cols; j++) {
-					rotatedMatrix[j][rows - 1 - i] = this.dimension[i][j];
-				}
-			}
-		} else {
-			// Rotate the matrix CCW
-			for (int i = 0; i < rows; i++) {
-				for (int j = 0; j < cols; j++) {
-					rotatedMatrix[cols - 1 - j][i] = this.dimension[i][j];
-				}
-			}
-		}
-
-		// Update the dimension array to the rotated matrix
-		this.dimension = rotatedMatrix;
+            if (sensHorraire) {
+				// Rotate clockwise
+                newX = y + pivotX;
+                newY = -x + pivotY;
+            } else {
+				// Rotate counterclockwise
+                newX = -y + pivotX;
+                newY = x + pivotY;
+            }
+            element.setCoordonnes(new Coordonnees(newX, newY));
+        }
 	}
-
-	/**
-	 *
-	 * @return
-	 */
-	public int[][] getDimension () {
-		return this.dimension;
-	}
-
 }

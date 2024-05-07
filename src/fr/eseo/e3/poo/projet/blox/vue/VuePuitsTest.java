@@ -6,20 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class VuePuitsTest {
-    public static void main(String[] args) {
-        // Create a Puits instance
-        Puits puits = new Puits();
-
-        // Create coordinates and a piece
-        Coordonnees coordonnees = new Coordonnees(2,1);
-        LPiece Piece = new LPiece(coordonnees, Couleur.ROUGE); // Assuming OPiece accepts Coordonnees and Color
-        Piece.tourner(true);
-        puits.setPieceSuivante(Piece); // Assuming setPieceSuivante is a method to set the next piece in Puits
-
-        // Create VuePuits and VuePiece
-        VuePuits vuePuits = new VuePuits(puits);
-        VuePiece vuePiece = new VuePiece(Piece);
-
+    private static void Affichage(VuePuits vuePuits, VuePiece vuePiece){
         // Associate VuePiece with VuePuits
         vuePuits.setVuePiece(vuePiece);
 
@@ -29,12 +16,30 @@ public class VuePuitsTest {
         frame.setResizable(true);
 
         // Set frame size based on VuePuits' dimensions
-        frame.setSize(new Dimension(puits.getLargeur(), puits.getProfondeur()));
+        frame.setSize(new Dimension(vuePuits.getPuits().getLargeur(), vuePuits.getPuits().getProfondeur()));
         frame.add(vuePuits);
         frame.pack(); // Fit the frame to the contents
 
         // Center the frame and make it visible
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+    public static void main(String[] args) {
+        // Create a Puits instance
+        Puits puits = new Puits();
+
+        // Create coordinates and a piece
+        Coordonnees coordonnees = new Coordonnees(0,0);
+        LPiece piece = new LPiece(coordonnees, Couleur.BLEU); // Assuming OPiece accepts Coordonnees and Color
+        piece.deplacerDe(2, 0);
+        piece.tourner(false);
+        puits.setPieceSuivante(piece); // Assuming setPieceSuivante is a method to set the next piece in Puits
+
+        // Create VuePuits and VuePiece
+        VuePuits vuePuits = new VuePuits(puits);
+        VuePiece vuePiece = new VuePiece(piece);
+
+        Affichage(vuePuits,vuePiece);
+
     }
 }
