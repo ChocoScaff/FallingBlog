@@ -2,7 +2,10 @@ package fr.eseo.e3.poo.projet.blox.vue;
 
 import fr.eseo.e3.poo.projet.blox.modele.*;
 import java.awt.*;
+import java.util.List;
 import javax.swing.*;
+
+import static fr.eseo.e3.poo.projet.blox.vue.VuePuits.MARGE;
 
 public class VuePiece extends JPanel {
     public static final double MULTIPLIER_TEINTE = 0.3;
@@ -20,18 +23,21 @@ public class VuePiece extends JPanel {
     }
 
     protected void afficherPiece(Graphics2D g2D, int tileSize) {
-        Color color = teinte(new Color(255, 0, 0)); // Example color
-        g2D.setColor(color);
-        int abs = this.piece.getElements().getCoordonnes().getAbscisse();
-        int ord = this.piece.getElements().getCoordonnes().getOrdonnee();
 
-        for(int row = 0; row < this.piece.getDimension().length; row += 1){
-            for(int col = 0; col < this.piece.getDimension()[row].length; col += 1){
-                if(this.piece.getDimension()[row][col] == 1){
-                    g2D.fill3DRect((row + abs) * tileSize + 20,(col + ord) * tileSize + 20, tileSize, tileSize, true);
-                }
-            }
+        List<Element> elements = this.piece.getElements();
+
+        for (int i = 0; i < elements.size(); i++) {
+            Element element = elements.get(i);
+
+            Color color = teinte(element.getCouleur().getCouleurPourAffichage()); // Example color
+            g2D.setColor(color);
+
+            int abs = element.getCoordonnes().getAbscisse();
+            int ord = element.getCoordonnes().getOrdonnee();
+
+            g2D.fill3DRect(abs * tileSize + MARGE,ord * tileSize + MARGE, tileSize, tileSize, true);
         }
+
 
     }
 }

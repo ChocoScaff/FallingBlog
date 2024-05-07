@@ -5,9 +5,11 @@ import java.awt.*;
 import javax.swing.*;
 
 public class VuePuits extends JPanel {
+    public static final int MARGE = 20;
     private final int taille;
     private Puits puits;
     private VuePiece vuePiece;
+
 
     public static final int TAILLE_PAR_DEFAUT = 700;
 
@@ -37,7 +39,10 @@ public class VuePuits extends JPanel {
         Graphics2D g2D = (Graphics2D) g.create();
         int tileSize = (this.getTaille() - 40) / puits.getProfondeur();
         g2D.setColor(Color.lightGray);
-        g2D.drawRect(20, 20, puits.getLargeur() * tileSize, puits.getProfondeur() * tileSize);
+        g2D.drawRect(MARGE, MARGE, puits.getLargeur() * tileSize, puits.getProfondeur() * tileSize);
+
+        //affiche nextPiece
+        //g2D.drawRect((getWidth() - (5 * tileSize)) - MARGE, MARGE, 5 * tileSize, 5 * tileSize);
 
         if (vuePiece != null) {
             vuePiece.afficherPiece(g2D, tileSize);
