@@ -32,7 +32,7 @@ public class VuePuitsTest {
         Coordonnees coordonnees = new Coordonnees(0,0);
         LPiece piece = new LPiece(coordonnees, Couleur.BLEU); // Assuming OPiece accepts Coordonnees and Color
         piece.deplacerDe(2, 0);
-        piece.tourner(false);
+        //piece.tourner(false);
         puits.setPieceSuivante(piece); // Assuming setPieceSuivante is a method to set the next piece in Puits
 
         // Create VuePuits and VuePiece

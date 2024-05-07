@@ -118,12 +118,12 @@ abstract public class Piece {
 
             if (sensHorraire) {
 				// Rotate clockwise
-                newX = y + pivotX;
-                newY = -x + pivotY;
+				newX = -y + pivotX;
+				newY = x + pivotY;
             } else {
 				// Rotate counterclockwise
-                newX = -y + pivotX;
-                newY = x + pivotY;
+				newX = y + pivotX;
+				newY = -x + pivotY;
             }
             element.setCoordonnes(new Coordonnees(newX, newY));
         }
