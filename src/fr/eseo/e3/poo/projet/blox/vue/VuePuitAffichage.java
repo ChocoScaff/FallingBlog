@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class VuePuitAffichage {
-    static void Affichage(VuePuits vuePuits){
+    public static void Affichage(VuePuits vuePuits){
 
         // Create and setup the frame
         JFrame frame = new JFrame("Simple Tetris");

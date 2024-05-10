@@ -1,5 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
+import fr.eseo.e3.poo.projet.blox.controleur.PieceDeplacement;
 import fr.eseo.e3.poo.projet.blox.modele.*;
 import java.awt.*;
 import javax.swing.*;
@@ -12,6 +13,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     private  final int taille;
     private Puits puits;
     private VuePiece vuePiece;
+    private int tileSize;
 
     public VuePuits(Puits puits) {
         this(puits, TAILLE_PAR_DEFAUT);
@@ -24,6 +26,9 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         setPreferredSize(new Dimension(taille, taille));
         setBackground(Color.WHITE);
         this.puits.addPropertyChangeListener(this); // Listen to property changes
+
+        PieceDeplacement deplacement = new PieceDeplacement(this, new Puits());
+        this.addMouseMotionListener(deplacement);
     }
 
     public VuePiece getVuePiece() {
@@ -39,7 +44,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g.create();
-        int tileSize = (this.getTaille() - 40) / puits.getProfondeur();
+        tileSize = (this.getTaille() - 40) / puits.getProfondeur();
         g2D.setColor(Color.lightGray);
         g2D.drawRect(MARGE, MARGE, puits.getLargeur() * tileSize, puits.getProfondeur() * tileSize);
 
@@ -54,7 +59,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     }
 
     @Override
-    public void propertyChange(PropertyChangeEvent event) {
+        public void propertyChange(PropertyChangeEvent event) {
         if (Puits.MODIFICATION_PIECE_ACTUELLE.equals(event.getPropertyName())) {
             setVuePiece(new VuePiece((Piece) event.getNewValue()));
         }
@@ -71,6 +76,10 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     public void setPuits(Puits puits) {
         this.puits = puits;
         repaint();
+    }
+
+    public int getColumnAt(int x) {
+        return (x + MARGE) / tileSize;
     }
 
 }
