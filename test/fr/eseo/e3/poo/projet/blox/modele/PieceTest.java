@@ -15,7 +15,18 @@ class PieceTest {
         Piece piece = usineDePiece.genererPiece();
 
         piece.setPuits(puits);
-        assertEquals(puits, piece.getPuits());
+        Assertions.assertEquals(puits, piece.getPuits());
+    }
+
+    @Test
+    void placerPieceTest() {
+        Coordonnees coordonnee = new Coordonnees(2, 2);
+        Piece piece = new LPiece(coordonnee, Couleur.CYAN);
+
+        Assertions.assertEquals(new Coordonnees(2, 2), piece.getElements().get(0).getCoordonnes());
+        Assertions.assertEquals(new Coordonnees(1, 2), piece.getElements().get(1).getCoordonnes());
+        Assertions.assertEquals(new Coordonnees(0, 2), piece.getElements().get(2).getCoordonnes());
+        Assertions.assertEquals(new Coordonnees(2, 3), piece.getElements().get(3).getCoordonnes());
     }
 
     @Test
@@ -41,4 +52,40 @@ class PieceTest {
         Assertions.assertEquals(new Coordonnees(2, 4), piece.getElements().get(2).getCoordonnes());
         Assertions.assertEquals(new Coordonnees(3, 2), piece.getElements().get(3).getCoordonnes());
     }
+
+    @Test
+    void deplaceHorizontalTest() {
+        Coordonnees coordonnee = new Coordonnees(2, 2);
+        Piece piece = new LPiece(coordonnee, Couleur.CYAN);
+
+        piece.deplacerDe(1,0);
+        Assertions.assertEquals(new Coordonnees(3, 2), piece.getElements().get(0).getCoordonnes());
+        Assertions.assertEquals(new Coordonnees(2, 2), piece.getElements().get(1).getCoordonnes());
+        Assertions.assertEquals(new Coordonnees(1, 2), piece.getElements().get(2).getCoordonnes());
+        Assertions.assertEquals(new Coordonnees(3, 3), piece.getElements().get(3).getCoordonnes());
+    }
+
+    @Test
+    void deplaceVerticalTest() {
+        Coordonnees coordonnee = new Coordonnees(2, 2);
+        Piece piece = new LPiece(coordonnee, Couleur.CYAN);
+
+        piece.deplacerDe(0,1);
+        Assertions.assertEquals(new Coordonnees(2, 3), piece.getElements().get(0).getCoordonnes());
+        Assertions.assertEquals(new Coordonnees(1, 3), piece.getElements().get(1).getCoordonnes());
+        Assertions.assertEquals(new Coordonnees(0, 3), piece.getElements().get(2).getCoordonnes());
+        Assertions.assertEquals(new Coordonnees(2, 4), piece.getElements().get(3).getCoordonnes());
+    }
+
+    @Test
+    void deplaceVersLeHautTest() {
+        Coordonnees coordonnee = new Coordonnees(2, 2);
+        Piece piece = new LPiece(coordonnee, Couleur.CYAN);
+
+        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            piece.deplacerDe(0, -1);
+        });
+        Assertions.assertEquals("Invalid movement direction. Movement must be left, right, or down.", exception.getMessage());
+    }
+
 }
