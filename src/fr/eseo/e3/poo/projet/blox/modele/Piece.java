@@ -87,16 +87,7 @@ abstract public class Piece {
 		for (int i = 0; i < elements.size(); i++) {
 			Element element = elements.get(i);
 
-			Coordonnees coor = element.getCoordonnes();
-			int abs = coor.getAbscisse();
-			abs = abs + deltaX;
-			coor.setAbscisse(abs);
-
-			int ord = coor.getOrdonnee();
-			ord = ord + deltaY;
-			coor.setOrdonnee(ord);
-
-			element.setCoordonnes(coor);
+			element.deplacerDe(deltaX, deltaY);
 		}
 	}
 

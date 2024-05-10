@@ -29,7 +29,7 @@ public class VuePiece extends JPanel {
         for (int i = 0; i < elements.size(); i++) {
             Element element = elements.get(i);
 
-            Color color = teinte(element.getCouleur().getCouleurPourAffichage()); // Example color
+            Color color = teinte(element.getCouleur().getCouleurPourAffichage());
             g2D.setColor(color);
 
             int abs = element.getCoordonnes().getAbscisse();

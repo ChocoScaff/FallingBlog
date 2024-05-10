@@ -6,10 +6,10 @@ import fr.eseo.e3.poo.projet.blox.modele.Element;
 import fr.eseo.e3.poo.projet.blox.modele.Piece;
 
 
-public class LPiece extends Piece {
+public class ZPiece extends Piece {
 
 
-	public LPiece(Coordonnees coordonnees, Couleur couleur) {
+	public ZPiece(Coordonnees coordonnees, Couleur couleur) {
 		super(coordonnees, couleur);
 	}
 
@@ -17,7 +17,7 @@ public class LPiece extends Piece {
 	protected void setElements(Coordonnees coordonnees, Couleur couleur) {
 		elements.add(new Element(coordonnees, couleur));
 		elements.add(new Element(new Coordonnees(coordonnees.getAbscisse(), coordonnees.getOrdonnee() - 1), couleur));
-		elements.add(new Element(new Coordonnees(coordonnees.getAbscisse(), coordonnees.getOrdonnee() - 2), couleur));
+		elements.add(new Element(new Coordonnees(coordonnees.getAbscisse() - 1, coordonnees.getOrdonnee() - 1), couleur));
 		elements.add(new Element(new Coordonnees(coordonnees.getAbscisse() + 1, coordonnees.getOrdonnee()), couleur));
 	}
 }

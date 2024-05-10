@@ -1,23 +1,27 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
-import fr.eseo.e3.poo.projet.blox.modele.Piece;
+import java.beans.PropertyChangeSupport;
+import java.beans.PropertyChangeListener;
 
 public class Puits {
 	private static final int LARGEUR_PAR_DEFAULT = 10;
 	private static final int PROFONDEUR_PAR_DEFAULT = 20;
+	public static final String MODIFICATION_PIECE_ACTUELLE = "PieceActuelleChanged";
+	public static final String MODIFICATION_PIECE_SUIVANTE = "PieceSuivanteChanged";
+
 
 	private int largeur;
 	private int profondeur;
 
 	private Piece pieceActuelle;
 	private Piece pieceSuivante;
+	private PropertyChangeSupport pcs;
 
 	/**
 	 *
 	 */
 	public Puits() {
-		this.largeur = LARGEUR_PAR_DEFAULT;
-		this.profondeur = PROFONDEUR_PAR_DEFAULT;
+		this(LARGEUR_PAR_DEFAULT, PROFONDEUR_PAR_DEFAULT);
 	}
 
 	/**
@@ -28,6 +32,7 @@ public class Puits {
 	public Puits(int largeur, int profondeur) {
 		this.largeur = largeur;
 		this.profondeur = profondeur;
+		this.pcs = new PropertyChangeSupport(this);
 	}
 
 	/**
@@ -51,14 +56,20 @@ public class Puits {
 	 * @param piece
 	 */
 	public void setPieceSuivante(Piece piece) {
-
-		if(this.pieceSuivante == null){
-			this.pieceSuivante = piece;
+		if (this.pieceActuelle == null) {
+			// First time setting pieceActuelle, transitioning from null to an actual piece.
+			this.pieceActuelle = piece;
+			pcs.firePropertyChange(MODIFICATION_PIECE_ACTUELLE, null, this.pieceActuelle);
 		} else {
+			// Normal behavior once the initial setup has been handled.
+			Piece oldPieceActuelle = this.pieceActuelle;
 			this.pieceActuelle = this.pieceSuivante;
 			this.pieceSuivante = piece;
+			pcs.firePropertyChange(MODIFICATION_PIECE_ACTUELLE, oldPieceActuelle, this.pieceActuelle);
 		}
 
+		// Fire event for pieceSuivante in every case.
+		pcs.firePropertyChange(MODIFICATION_PIECE_SUIVANTE, null, this.pieceSuivante);
 	}
 
 	/**
@@ -91,5 +102,13 @@ public class Puits {
 	 */
 	public void setLargeur(int largeur) {
 		this.largeur = largeur;
+	}
+
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		this.pcs.addPropertyChangeListener(listener);
+	}
+
+	public void removePropertyChangeListener(PropertyChangeListener listener) {
+		this.pcs.removePropertyChangeListener(listener);
 	}
 }
