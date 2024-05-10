@@ -29,10 +29,14 @@ public class UsineDePiece {
 
 
     private void initializeFactories() {
-        //pieceFactories.add(coords -> new LPiece(coords, Couleur.BLEU));
-        //pieceFactories.add(coords -> new OPiece(coords, Couleur.BLEU));
-        //pieceFactories.add(coords -> new IPiece(coords, Couleur.BLEU));
+
+        pieceFactories.add(coords -> new OPiece(coords, Couleur.ROUGE));
+        pieceFactories.add(coords -> new IPiece(coords, Couleur.ORANGE));
         pieceFactories.add(coords -> new TPiece(coords, Couleur.BLEU));
+        pieceFactories.add(coords -> new LPiece(coords, Couleur.VERT));
+        pieceFactories.add(coords -> new JPiece(coords, Couleur.JAUNE));
+        pieceFactories.add(coords -> new ZPiece(coords, Couleur.CYAN));
+        pieceFactories.add(coords -> new SPiece(coords, Couleur.VIOLET));
     }
 
 
