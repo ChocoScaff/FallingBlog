@@ -2,83 +2,72 @@ package fr.eseo.e3.poo.projet.blox.modele;
 
 import fr.eseo.e3.poo.projet.blox.modele.pieces.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
 
 public class UsineDePiece {
 
-
-    public enum Mode{
+    public enum Mode {
         ALEATOIRE_COMPLET,
         ALEATOIRE_PIECE,
         CYCLIC
     }
 
     private Mode mode;
-    private static final int NUM_DE_TYPE_DE_PIECE = 2;
     private int semiRandomIndex = -1;
     private int cycleIndex = 0;
 
-    /**
-     *
-     */
+
+    private List<Function<Coordonnees, Piece>> pieceFactories = new ArrayList<>();
+
+
     public UsineDePiece() {
         this.mode = Mode.ALEATOIRE_COMPLET;
-
+        initializeFactories();
     }
 
-    /**
-     *
-     * @param mode
-     */
+
+    private void initializeFactories() {
+        //pieceFactories.add(coords -> new LPiece(coords, Couleur.BLEU));
+        //pieceFactories.add(coords -> new OPiece(coords, Couleur.BLEU));
+        //pieceFactories.add(coords -> new IPiece(coords, Couleur.BLEU));
+        pieceFactories.add(coords -> new TPiece(coords, Couleur.BLEU));
+    }
+
+
     public void setMode(Mode mode) {
         this.mode = mode;
     }
 
-    /**
-     *
-     * @return
-     */
     public Piece genererPiece() {
-        Coordonnees coordonnees = new Coordonnees(2,3);
-        Couleur couleur = Couleur.BLEU;
+        Coordonnees coordonnees = new Coordonnees(2, 3);
         Piece piece = null;
 
-        if (this.mode == Mode.ALEATOIRE_COMPLET){
-            int randomIndex = (int) (Math.random() * NUM_DE_TYPE_DE_PIECE);
-            piece = this.pieceTypes(randomIndex, coordonnees, couleur);
-        }
-
-        else if (this.mode == Mode.ALEATOIRE_PIECE){
-            int oldSemiRandomIndex = this.semiRandomIndex;
-            while (this.semiRandomIndex == oldSemiRandomIndex){
-                this.semiRandomIndex = (int) (Math.random() * NUM_DE_TYPE_DE_PIECE);
-            }
-
-            piece = this.pieceTypes(semiRandomIndex, coordonnees, couleur);
-
-        }
-
-        else if (this.mode == Mode.CYCLIC){
-            piece = this.pieceTypes(this.cycleIndex, coordonnees, couleur);
-            if(this.cycleIndex < NUM_DE_TYPE_DE_PIECE){cycleIndex += 1;}
-            else {this.cycleIndex = 0;}
-
-        }
-
-        return piece;
-    }
-
-    public Piece pieceTypes(int index, Coordonnees coordonnees, Couleur couleur){
-        Piece piece = null;
-        switch (index) {
-            case 0:
-                piece = new LPiece(coordonnees, couleur);
+        switch (this.mode) {
+            case ALEATOIRE_COMPLET:
+                int randomIndex = (int) (Math.random() * pieceFactories.size());
+                piece = pieceFactories.get(randomIndex).apply(coordonnees);
                 break;
 
-            case 1:
-                piece = new OPiece(coordonnees, couleur);
+            case ALEATOIRE_PIECE:
+                int oldSemiRandomIndex = this.semiRandomIndex;
+                while (this.semiRandomIndex == oldSemiRandomIndex) {
+                    this.semiRandomIndex = (int) (Math.random() * pieceFactories.size());
+                }
+                piece = pieceFactories.get(this.semiRandomIndex).apply(coordonnees);
                 break;
 
+            case CYCLIC:
+                piece = pieceFactories.get(this.cycleIndex).apply(coordonnees);
+                if (this.cycleIndex < pieceFactories.size() - 1) {
+                    this.cycleIndex += 1;
+                } else {
+                    this.cycleIndex = 0;
+                }
+                break;
         }
+
         return piece;
     }
 }
