@@ -67,4 +67,15 @@ class PieceTest {
         Assertions.assertEquals(new Coordonnees(3, 3), piece.getElements().get(3).getCoordonnes());
     }
 
+    @Test
+    void deplaceVersLeHautTest() {
+        Coordonnees coordonnee = new Coordonnees(2, 2);
+        Piece piece = new LPiece(coordonnee, Couleur.CYAN);
+
+        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            piece.deplacerDe(0, -1);
+        });
+        Assertions.assertEquals("Invalid movement direction. Movement must be left, right, or down.", exception.getMessage());
+    }
+
 }

@@ -83,6 +83,10 @@ abstract public class Piece {
 	 */
 	public void deplacerDe(int deltaAbscisse, int deltaOrdonnee) {
 
+		if (deltaOrdonnee < 0) {
+			throw new IllegalArgumentException("Invalid movement direction. Movement must be left, right, or down.");
+		}
+
 		for (int i = 0; i < elements.size(); i++) {
 			Element element = elements.get(i);
 
