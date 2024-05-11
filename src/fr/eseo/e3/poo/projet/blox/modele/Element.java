@@ -106,15 +106,15 @@ public class Element {
 	public void deplacerDe(int deltaX, int deltaY) {
 
 		Coordonnees coor = this.getCoordonnes();
+
 		int abs = coor.getAbscisse();
 		abs = abs + deltaX;
-		coor.setAbscisse(abs);
 
 		int ord = coor.getOrdonnee();
 		ord = ord + deltaY;
-		coor.setOrdonnee(ord);
 
-		this.setCoordonnes(coor);
+		Coordonnees newCoor = new Coordonnees(abs, ord);
+		this.setCoordonnes(newCoor);
 
 	}
     

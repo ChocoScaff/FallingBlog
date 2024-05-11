@@ -38,6 +38,23 @@ public class VuePiece extends JPanel {
             g2D.fill3DRect(abs * tileSize + MARGE,ord * tileSize + MARGE, tileSize, tileSize, true);
         }
 
+    }
+
+    protected void afficherNextPiece(Graphics2D g2D, int tileSize) {
+
+        List<Element> elements = this.piece.getElements();
+
+        for (int i = 0; i < elements.size(); i++) {
+            Element element = elements.get(i);
+
+            Color color = teinte(element.getCouleur().getCouleurPourAffichage());
+            g2D.setColor(color);
+
+            int abs = element.getCoordonnes().getAbscisse();
+            int ord = element.getCoordonnes().getOrdonnee();
+
+            g2D.fill3DRect(abs * tileSize + MARGE,ord * tileSize + MARGE, tileSize, tileSize, true);
+        }
 
     }
 }

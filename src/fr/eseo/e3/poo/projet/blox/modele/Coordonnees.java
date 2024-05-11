@@ -6,8 +6,8 @@ import java.util.Objects;
  * @class Coordonnees
  */
 public class Coordonnees {
-	private int abscisse;
-	private int ordonnee;
+	private final int abscisse;
+	private final int ordonnee;
 	
 	/**
 	 * 
@@ -34,28 +34,9 @@ public class Coordonnees {
 	public int getOrdonnee() {
 		return this.ordonnee;
 	}
+
 	
-	/**
-	 * 
-	 * @param abscisse
-	 */
-	public void setAbscisse(int abscisse) {
-		this.abscisse = abscisse;
-	}
-	
-	/**
-	 * 
-	 * @param ordonnee
-	 */
-	public void setOrdonnee(int ordonnee) {
-		this.ordonnee = ordonnee;
-	}
-	
-	/**
-	 * 	Override toString() method
-	 * 
-	 * @return
-	 */
+
     public String toString() {
         return "(" + this.abscisse + ", " + this.ordonnee + ")";
     }

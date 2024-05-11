@@ -13,6 +13,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     private  final int taille;
     private Puits puits;
     private VuePiece vuePiece;
+    private VuePiece vueNextPiece;
     private int tileSize;
 
     public VuePuits(Puits puits) {
@@ -23,6 +24,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         this.puits = puits;
         this.taille = taille;
         this.vuePiece = new VuePiece(puits.getPieceActuelle());
+        this.vueNextPiece = new VuePiece(puits.getPieceSuivante());
         setPreferredSize(new Dimension(taille, taille));
         setBackground(Color.WHITE);
         this.puits.addPropertyChangeListener(this); // Listen to property changes
@@ -49,10 +51,14 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         g2D.drawRect(MARGE, MARGE, puits.getLargeur() * tileSize, puits.getProfondeur() * tileSize);
 
         //affiche nextPiece
-        //g2D.drawRect((getWidth() - (5 * tileSize)) - MARGE, MARGE, 5 * tileSize, 5 * tileSize);
+        g2D.drawRect((getWidth() - (5 * tileSize)) - MARGE, MARGE, 5 * tileSize, 5 * tileSize);
 
         if (vuePiece != null) {
             vuePiece.afficherPiece(g2D, tileSize);
+        }
+
+        if (vueNextPiece != null) {
+            //vueNextPiece.afficherNextPiece(g2D, tileSize);
         }
 
         g2D.dispose();
@@ -79,7 +85,11 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     }
 
     public int getColumnAt(int x) {
-        return (x + MARGE) / tileSize;
+        return (x - MARGE) / tileSize;
+    }
+
+    public int getRowAt(int y) {
+        return (y - MARGE) / tileSize;
     }
 
 }
