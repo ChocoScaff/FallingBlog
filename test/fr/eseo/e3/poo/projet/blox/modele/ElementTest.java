@@ -43,7 +43,7 @@ public class ElementTest {
     public void testSetCoordonnes() {
         Coordonnees coordonnees = new Coordonnees(1, 2);
         Element element = new Element(3, 4);
-        element.setCoordonnes(coordonnees);
+        element.setCoordonnees(coordonnees);
         assertEquals(coordonnees, element.getCoordonnes());
     }
 

@@ -64,10 +64,10 @@ public class Element {
 	
 	/**
 	 * 
-	 * @param coordonne
+	 * @param coordonnee
 	 */
-	public void setCoordonnes(Coordonnees coordonne) {
-		this.coordonnees = coordonne;
+	public void setCoordonnees(Coordonnees coordonnee) {
+		this.coordonnees = coordonnee;
 	}
 	
 	/**
@@ -104,10 +104,8 @@ public class Element {
 	 * @param deltaY
 	 */
 	public void deplacerDe(int deltaAbscisse, int deltaOrdonnee) {
-		Coordonnees coor = this.getCoordonnes();
-		Coordonnees newCoor = coor.deplacerDe(deltaAbscisse, deltaOrdonnee);
-		this.setCoordonnes(newCoor);
-	}
+		this.coordonnees = this.coordonnees.deplacerDe(deltaAbscisse, deltaOrdonnee);
+		}
     
     /**
      * Override hashCode() method

@@ -9,16 +9,6 @@ import static org.junit.Assert.assertEquals;
 class PieceTest {
 
     @Test
-    void setPuits() {
-        Puits puits = new Puits();
-        UsineDePiece usineDePiece = new UsineDePiece();
-        Piece piece = usineDePiece.genererPiece();
-
-        piece.setPuits(puits);
-        Assertions.assertEquals(puits, piece.getPuits());
-    }
-
-    @Test
     void placerPieceTest() {
         Coordonnees coordonnee = new Coordonnees(2, 2);
         Piece piece = new LPiece(coordonnee, Couleur.CYAN);

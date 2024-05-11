@@ -1,6 +1,5 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -46,7 +45,7 @@ abstract public class Piece {
 		int deltaY = ordonnee - ref.getOrdonnee();
 		for (Element el : elements) {
 			Coordonnees coord = el.getCoordonnes();
-			el.setCoordonnes(new Coordonnees(coord.getAbscisse() + deltaX, coord.getOrdonnee() + deltaY));
+			el.setCoordonnees(new Coordonnees(coord.getAbscisse() + deltaX, coord.getOrdonnee() + deltaY));
 		}
     }
 
@@ -116,7 +115,7 @@ abstract public class Piece {
 				newX = y + pivotX;
 				newY = -x + pivotY;
             }
-            element.setCoordonnes(new Coordonnees(newX, newY));
+            element.setCoordonnees(new Coordonnees(newX, newY));
         }
 	}
 }
