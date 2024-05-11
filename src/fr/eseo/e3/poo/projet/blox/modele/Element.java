@@ -100,8 +100,8 @@ public class Element {
 
 	/**
 	 *
-	 * @param deltaX
-	 * @param deltaY
+	 * @param deltaAbscisse
+	 * @param deltaOrdonnee
 	 */
 	public void deplacerDe(int deltaAbscisse, int deltaOrdonnee) {
 		this.coordonnees = this.coordonnees.deplacerDe(deltaAbscisse, deltaOrdonnee);

@@ -78,8 +78,8 @@ abstract public class Piece {
 
 	/**
 	 *
-	 * @param deltaX
-	 * @param deltaY
+	 * @param deltaAbscisse
+	 * @param deltaOrdonnee
 	 */
 	public void deplacerDe(int deltaAbscisse, int deltaOrdonnee) {
 
