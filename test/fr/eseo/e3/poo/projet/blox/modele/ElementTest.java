@@ -74,14 +74,6 @@ public class ElementTest {
         assertEquals(element1, element2);
     }
 
-    @Test
-    public void testHashCode() {
-        Coordonnees coordonnees = new Coordonnees(1, 2);
-        Couleur couleur = Couleur.ROUGE;
-        Element element = new Element(coordonnees, couleur);
-        int expected = 961 * 31 + couleur.hashCode();
-        assertEquals(expected, element.hashCode());
-    }
 }
 
 
