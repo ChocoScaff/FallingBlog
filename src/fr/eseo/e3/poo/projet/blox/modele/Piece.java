@@ -82,12 +82,12 @@ abstract public class Piece {
 	 * @param deltaX
 	 * @param deltaY
 	 */
-	public void deplacerDe(int deltaX, int deltaY) {
+	public void deplacerDe(int deltaAbscisse, int deltaOrdonnee) {
 
 		for (int i = 0; i < elements.size(); i++) {
 			Element element = elements.get(i);
 
-			element.deplacerDe(deltaX, deltaY);
+			element.deplacerDe(deltaAbscisse, deltaOrdonnee);
 		}
 	}
 

@@ -103,19 +103,10 @@ public class Element {
 	 * @param deltaX
 	 * @param deltaY
 	 */
-	public void deplacerDe(int deltaX, int deltaY) {
-
+	public void deplacerDe(int deltaAbscisse, int deltaOrdonnee) {
 		Coordonnees coor = this.getCoordonnes();
-
-		int abs = coor.getAbscisse();
-		abs = abs + deltaX;
-
-		int ord = coor.getOrdonnee();
-		ord = ord + deltaY;
-
-		Coordonnees newCoor = new Coordonnees(abs, ord);
+		Coordonnees newCoor = coor.deplacerDe(deltaAbscisse, deltaOrdonnee);
 		this.setCoordonnes(newCoor);
-
 	}
     
     /**

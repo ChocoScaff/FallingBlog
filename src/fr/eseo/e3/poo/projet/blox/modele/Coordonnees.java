@@ -35,7 +35,10 @@ public class Coordonnees {
 		return this.ordonnee;
 	}
 
-	
+	public Coordonnees deplacerDe(int deltaAbscisse, int deltaOrdonnee) {
+		return new Coordonnees(this.abscisse + deltaAbscisse, this.ordonnee + deltaOrdonnee);
+	}
+
 
     public String toString() {
         return "(" + this.abscisse + ", " + this.ordonnee + ")";
