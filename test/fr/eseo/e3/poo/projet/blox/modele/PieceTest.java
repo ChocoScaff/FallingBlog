@@ -1,10 +1,8 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
-import fr.eseo.e3.poo.projet.blox.modele.pieces.LPiece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.Assert.assertEquals;
 
 class PieceTest {
 
@@ -72,10 +70,21 @@ class PieceTest {
         Coordonnees coordonnee = new Coordonnees(2, 2);
         Piece piece = new LPiece(coordonnee, Couleur.CYAN);
 
-        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            piece.deplacerDe(0, -1);
-        });
+        var exception = Assertions.assertThrows(IllegalArgumentException.class, () -> piece.deplacerDe(0, -1));
         Assertions.assertEquals("Invalid movement direction. Movement must be left, right, or down.", exception.getMessage());
     }
+
+    @Test
+    void tournerOPieceTest() {
+        Coordonnees coordonnee = new Coordonnees(2, 2);
+        Piece piece = new OPiece(coordonnee, Couleur.CYAN);
+
+        piece.tourner(true);
+        Assertions.assertEquals(new Coordonnees(2, 2), piece.getElements().get(0).getCoordonnes());
+        Assertions.assertEquals(new Coordonnees(3, 2), piece.getElements().get(1).getCoordonnes());
+        Assertions.assertEquals(new Coordonnees(2, 1), piece.getElements().get(2).getCoordonnes());
+        Assertions.assertEquals(new Coordonnees(3, 1), piece.getElements().get(3).getCoordonnes());
+    }
+
 
 }

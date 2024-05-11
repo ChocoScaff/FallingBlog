@@ -17,7 +17,7 @@ public class OPiece extends Piece {
 		elements.add(new Element(new Coordonnees(coordonnees.getAbscisse() + 1, coordonnees.getOrdonnee() - 1), couleur));
 	}
 
-
+    @Override
 	public void tourner(boolean sensHorraire) {
 		System.out.println("OPiece ne peut pas tourner");
 	}
