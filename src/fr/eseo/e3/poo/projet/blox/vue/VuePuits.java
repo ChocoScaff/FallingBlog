@@ -1,7 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
 import fr.eseo.e3.poo.projet.blox.controleur.PieceDeplacement;
-import fr.eseo.e3.poo.projet.blox.controleur.PieceRotation;
 import fr.eseo.e3.poo.projet.blox.modele.Piece;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 
@@ -15,6 +14,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     public static final int TAILLE_PAR_DEFAUT = 700;
     private final int taille;
     private Puits puits;
+    private final VueTas vueTas;
     private VuePiece vuePiece;
     private final VuePiece vueNextPiece;
     private int tileSize;
@@ -32,12 +32,13 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         setBackground(Color.WHITE);
         this.puits.addPropertyChangeListener(this); // Listen to property changes
 
-        PieceDeplacement pieceDeplacement = new PieceDeplacement(this, puits);
-        PieceRotation pieceRotation = new PieceRotation(this, puits);
+        this.vueTas = new VueTas(puits.getTas());
 
+        PieceDeplacement pieceDeplacement = new PieceDeplacement(this, puits);
         this.addMouseListener(pieceDeplacement);
         this.addMouseMotionListener(pieceDeplacement);
         this.addMouseWheelListener(pieceDeplacement);
+
 
     }
 
@@ -67,6 +68,10 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
 
         if (vueNextPiece != null) {
             vueNextPiece.afficherNextPiece(g2D, tileSize);
+        }
+
+        if (vueTas != null) {
+            vueTas.afficherTas(g2D, tileSize);
         }
 
         g2D.dispose();
