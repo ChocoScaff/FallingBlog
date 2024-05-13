@@ -1,17 +1,23 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
-import fr.eseo.e3.poo.projet.blox.modele.*;
-import java.awt.*;
+import fr.eseo.e3.poo.projet.blox.controleur.PieceDeplacement;
+import fr.eseo.e3.poo.projet.blox.controleur.PieceRotation;
+import fr.eseo.e3.poo.projet.blox.modele.Piece;
+import fr.eseo.e3.poo.projet.blox.modele.Puits;
+
 import javax.swing.*;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class VuePuits extends JPanel implements PropertyChangeListener {
     public static final int MARGE = 20;
     public static final int TAILLE_PAR_DEFAUT = 700;
-    private  final int taille;
+    private final int taille;
     private Puits puits;
     private VuePiece vuePiece;
+    private final VuePiece vueNextPiece;
+    private int tileSize;
 
     public VuePuits(Puits puits) {
         this(puits, TAILLE_PAR_DEFAUT);
@@ -21,9 +27,18 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         this.puits = puits;
         this.taille = taille;
         this.vuePiece = new VuePiece(puits.getPieceActuelle());
+        this.vueNextPiece = new VuePiece(puits.getPieceSuivante());
         setPreferredSize(new Dimension(taille, taille));
         setBackground(Color.WHITE);
         this.puits.addPropertyChangeListener(this); // Listen to property changes
+
+        PieceDeplacement pieceDeplacement = new PieceDeplacement(this, puits);
+        PieceRotation pieceRotation = new PieceRotation(this, puits);
+
+        this.addMouseListener(pieceDeplacement);
+        this.addMouseMotionListener(pieceDeplacement);
+        this.addMouseWheelListener(pieceDeplacement);
+
     }
 
     public VuePiece getVuePiece() {
@@ -39,15 +54,19 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g.create();
-        int tileSize = (this.getTaille() - 40) / puits.getProfondeur();
+        tileSize = (this.getTaille() - 40) / puits.getProfondeur();
         g2D.setColor(Color.lightGray);
         g2D.drawRect(MARGE, MARGE, puits.getLargeur() * tileSize, puits.getProfondeur() * tileSize);
 
         //affiche nextPiece
-        //g2D.drawRect((getWidth() - (5 * tileSize)) - MARGE, MARGE, 5 * tileSize, 5 * tileSize);
+        g2D.drawRect((getWidth() - (5 * tileSize)) - MARGE, MARGE, 5 * tileSize, 6 * tileSize);
 
         if (vuePiece != null) {
             vuePiece.afficherPiece(g2D, tileSize);
+        }
+
+        if (vueNextPiece != null) {
+            vueNextPiece.afficherNextPiece(g2D, tileSize);
         }
 
         g2D.dispose();
@@ -71,6 +90,14 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     public void setPuits(Puits puits) {
         this.puits = puits;
         repaint();
+    }
+
+    public int getColumnAt(int x) {
+        return (x - MARGE) / tileSize;
+    }
+
+    public int getRowAt(int y) {
+        return (y - MARGE) / tileSize;
     }
 
 }
