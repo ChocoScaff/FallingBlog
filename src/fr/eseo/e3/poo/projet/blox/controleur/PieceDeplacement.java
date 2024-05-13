@@ -1,28 +1,33 @@
 package fr.eseo.e3.poo.projet.blox.controleur;
 
-import fr.eseo.e3.poo.projet.blox.modele.*;
-import fr.eseo.e3.poo.projet.blox.vue.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
-public class PieceDeplacement implements MouseMotionListener {
-    private VuePuits vue;
-    private Puits puits;
+import java.awt.event.*;
+
+public class PieceDeplacement implements MouseListener, MouseMotionListener, MouseWheelListener {
+    private final VuePuits vuePuits;
+    private final Puits puits;
     private int lastColumn = -1;
 
-    public PieceDeplacement(VuePuits vue, Puits puits) {
-        this.vue = vue;
+    public PieceDeplacement(VuePuits vuePuits, Puits puits) {
+        this.vuePuits = vuePuits;
         this.puits = puits;
-        this.vue.addMouseMotionListener(this);
+        this.vuePuits.addMouseMotionListener(this);
     }
 
     @Override
-    public void mouseMoved(MouseEvent e) {
+    public void mouseDragged(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent mouseEvent) {
         if (puits.getPieceActuelle() != null) {
-            int currentMouseColumn = vue.getColumnAt(e.getX());
+            int currentMouseColumn = vuePuits.getColumnAt(mouseEvent.getX());
             int pieceColumn = puits.getPieceActuelle().getElements().get(0).getCoordonnes().getAbscisse();
 
-            System.out.println("Mouse X: " + e.getX() + ", Column: " + currentMouseColumn);
+            System.out.println("Mouse X: " + mouseEvent.getX() + ", Column: " + currentMouseColumn);
             System.out.println("Piece Current Column: " + pieceColumn);
 
             int columnDelta = currentMouseColumn - pieceColumn;
@@ -32,7 +37,7 @@ public class PieceDeplacement implements MouseMotionListener {
                 try {
                     puits.getPieceActuelle().deplacerDe(columnDelta, 0);
                     lastColumn = currentMouseColumn;
-                    vue.repaint(); //repaint la frame a chaque mouvment, peut etre le bouger ca plus tard
+                    vuePuits.repaint(); //repaint la frame a chaque mouvment, peut etre le bouger ca plus tard
                     System.out.println("Moved piece to column: " + currentMouseColumn);
                 } catch (Exception ex) {
                     System.out.println("Failed to move piece: " + ex.getMessage());
@@ -43,7 +48,40 @@ public class PieceDeplacement implements MouseMotionListener {
 
 
     @Override
-    public void mouseDragged(MouseEvent e) {
-        // This method can be implemented if needed for dragging interactions
+    public void mouseClicked(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent mouseEvent) {
+        lastColumn = -1;
+    }
+
+    @Override
+    public void mouseExited(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent mouseEvent) {
+        if (puits.getPieceActuelle() != null && mouseEvent.getWheelRotation() > 0) {
+            puits.getPieceActuelle().deplacerDe(0, mouseEvent.getWheelRotation());
+            vuePuits.repaint();
+        }
+        if (puits.getPieceActuelle() != null && mouseEvent.getWheelRotation() < 0) {
+            puits.getPieceActuelle().tourner(true);
+            vuePuits.repaint();
+        }
     }
 }
+

@@ -6,38 +6,35 @@ import java.util.Objects;
  * @class Coordonnees
  */
 public class Coordonnees {
-	private final int abscisse;
-	private final int ordonnee;
-	
-	/**
-	 * 
-	 * @param abscisse
-	 * @param ordonnee
-	 */
-	public Coordonnees(int abscisse, int ordonnee) {
-		this.abscisse = abscisse;
-		this.ordonnee = ordonnee;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public int getAbscisse() {
-		return this.abscisse;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public int getOrdonnee() {
-		return this.ordonnee;
-	}
+    private final int abscisse;
+    private final int ordonnee;
 
-	public Coordonnees deplacerDe(int deltaAbscisse, int deltaOrdonnee) {
-		return new Coordonnees(this.abscisse + deltaAbscisse, this.ordonnee + deltaOrdonnee);
-	}
+    /**
+     * @param abscisse
+     * @param ordonnee
+     */
+    public Coordonnees(int abscisse, int ordonnee) {
+        this.abscisse = abscisse;
+        this.ordonnee = ordonnee;
+    }
+
+    /**
+     * @return
+     */
+    public int getAbscisse() {
+        return this.abscisse;
+    }
+
+    /**
+     * @return
+     */
+    public int getOrdonnee() {
+        return this.ordonnee;
+    }
+
+    public Coordonnees deplacerDe(int deltaAbscisse, int deltaOrdonnee) {
+        return new Coordonnees(this.abscisse + deltaAbscisse, this.ordonnee + deltaOrdonnee);
+    }
 
 
     public String toString() {
@@ -45,12 +42,10 @@ public class Coordonnees {
     }
 
     /**
-     *     
      * Override equals() method
-     * 
+     *
      * @param obj
      * @return true or false
-     * 
      */
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -61,11 +56,11 @@ public class Coordonnees {
 
     /**
      * Override hashCode() method
-     * 
+     *
      * @return
      */
     public int hashCode() {
         return Objects.hash(this.abscisse, this.ordonnee);
     }
-	
+
 }

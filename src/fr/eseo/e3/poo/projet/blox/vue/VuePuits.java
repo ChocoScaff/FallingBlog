@@ -1,19 +1,22 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
 import fr.eseo.e3.poo.projet.blox.controleur.PieceDeplacement;
-import fr.eseo.e3.poo.projet.blox.modele.*;
-import java.awt.*;
+import fr.eseo.e3.poo.projet.blox.controleur.PieceRotation;
+import fr.eseo.e3.poo.projet.blox.modele.Piece;
+import fr.eseo.e3.poo.projet.blox.modele.Puits;
+
 import javax.swing.*;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class VuePuits extends JPanel implements PropertyChangeListener {
     public static final int MARGE = 20;
     public static final int TAILLE_PAR_DEFAUT = 700;
-    private  final int taille;
+    private final int taille;
     private Puits puits;
     private VuePiece vuePiece;
-    private VuePiece vueNextPiece;
+    private final VuePiece vueNextPiece;
     private int tileSize;
 
     public VuePuits(Puits puits) {
@@ -29,8 +32,13 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         setBackground(Color.WHITE);
         this.puits.addPropertyChangeListener(this); // Listen to property changes
 
-        PieceDeplacement deplacement = new PieceDeplacement(this, new Puits());
-        this.addMouseMotionListener(deplacement);
+        PieceDeplacement pieceDeplacement = new PieceDeplacement(this, puits);
+        PieceRotation pieceRotation = new PieceRotation(this, puits);
+
+        this.addMouseListener(pieceDeplacement);
+        this.addMouseMotionListener(pieceDeplacement);
+        this.addMouseWheelListener(pieceDeplacement);
+
     }
 
     public VuePiece getVuePiece() {
@@ -51,21 +59,21 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         g2D.drawRect(MARGE, MARGE, puits.getLargeur() * tileSize, puits.getProfondeur() * tileSize);
 
         //affiche nextPiece
-        g2D.drawRect((getWidth() - (5 * tileSize)) - MARGE, MARGE, 5 * tileSize, 5 * tileSize);
+        g2D.drawRect((getWidth() - (5 * tileSize)) - MARGE, MARGE, 5 * tileSize, 6 * tileSize);
 
         if (vuePiece != null) {
             vuePiece.afficherPiece(g2D, tileSize);
         }
 
         if (vueNextPiece != null) {
-            //vueNextPiece.afficherNextPiece(g2D, tileSize);
+            vueNextPiece.afficherNextPiece(g2D, tileSize);
         }
 
         g2D.dispose();
     }
 
     @Override
-        public void propertyChange(PropertyChangeEvent event) {
+    public void propertyChange(PropertyChangeEvent event) {
         if (Puits.MODIFICATION_PIECE_ACTUELLE.equals(event.getPropertyName())) {
             setVuePiece(new VuePiece((Piece) event.getNewValue()));
         }

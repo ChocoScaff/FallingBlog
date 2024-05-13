@@ -19,7 +19,7 @@ public class UsineDePiece {
     private int cycleIndex = 0;
 
 
-    private List<Function<Coordonnees, Piece>> pieceFactories = new ArrayList<>();
+    private final List<Function<Coordonnees, Piece>> pieceFactories = new ArrayList<>();
 
 
     public UsineDePiece() {
