@@ -7,8 +7,9 @@ import fr.eseo.e3.poo.projet.blox.vue.VuePuitAffichage;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
 import javax.swing.*;
+import java.util.Random;
 
-public class ControleurMain {
+public class ControllerMain {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             Puits puits = new Puits();
@@ -22,8 +23,7 @@ public class ControleurMain {
 
             VuePuits vuePuits = new VuePuits(puits);
 
-            PieceDeplacement pieceDeplacement = new PieceDeplacement(vuePuits, puits);
-            vuePuits.addMouseMotionListener(pieceDeplacement);
+            puits.getTas().construireTas(9, 3, new Random());
 
             VuePuitAffichage.Affichage(vuePuits);
         });

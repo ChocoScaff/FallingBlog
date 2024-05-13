@@ -15,6 +15,7 @@ public class Puits {
 
     private Piece pieceActuelle;
     private Piece pieceSuivante;
+    private final Tas tas;
     private final PropertyChangeSupport pcs;
 
     /**
@@ -31,6 +32,7 @@ public class Puits {
     public Puits(int largeur, int profondeur) {
         this.largeur = largeur;
         this.profondeur = profondeur;
+        this.tas = new Tas(this);
         this.pcs = new PropertyChangeSupport(this);
     }
 
@@ -103,5 +105,9 @@ public class Puits {
 
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         this.pcs.removePropertyChangeListener(listener);
+    }
+
+    public Tas getTas() {
+        return tas;
     }
 }
