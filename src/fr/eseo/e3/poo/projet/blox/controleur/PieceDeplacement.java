@@ -38,7 +38,7 @@ public class PieceDeplacement implements MouseListener, MouseMotionListener, Mou
                 try {
                     puits.getPieceActuelle().deplacerDe(columnDelta, 0);
                     lastColumn = currentMouseColumn;
-                    vuePuits.repaint(); //repaint la frame a chaque mouvment, peut etre le bouger ca plus tard
+                    vuePuits.repaint(); //Todo: deplacer dans le GameLoop quand il serat fait
                     System.out.println("Moved piece to column: " + currentMouseColumn);
                 } catch (Exception ex) {
                     System.out.println("Failed to move piece: " + ex.getMessage());
@@ -57,7 +57,7 @@ public class PieceDeplacement implements MouseListener, MouseMotionListener, Mou
                 } else if (SwingUtilities.isLeftMouseButton(mouseEvent)) {
                     puits.getPieceActuelle().tourner(false);
                 }
-                vuePuits.repaint();
+                vuePuits.repaint(); //Todo: deplacer dans le GameLoop quand il serat fait
             } catch (Exception ex) {
                 System.out.println("Rotation failed: " + ex.getMessage());
             }
@@ -91,7 +91,7 @@ public class PieceDeplacement implements MouseListener, MouseMotionListener, Mou
             vuePuits.repaint();
         }
         if (puits.getPieceActuelle() != null && mouseEvent.getWheelRotation() < 0) {
-            puits.gravite();
+            puits.gravite(); //Todo: activation manuel de gravite, a deplacer dans le GameLoop quand il serat fait
             vuePuits.repaint();
         }
     }
