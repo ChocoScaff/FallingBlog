@@ -14,7 +14,7 @@ public class UsineDePiece {
         CYCLIC
     }
 
-    private Mode mode;
+    Mode mode;
     private int semiRandomIndex = -1;
     private int cycleIndex = 0;
 
@@ -23,7 +23,7 @@ public class UsineDePiece {
 
 
     public UsineDePiece() {
-        this.mode = Mode.ALEATOIRE_COMPLET;
+        this.mode = Mode.ALEATOIRE_PIECE;
         initializeFactories();
     }
 

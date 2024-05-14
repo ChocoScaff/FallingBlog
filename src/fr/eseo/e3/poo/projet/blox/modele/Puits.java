@@ -55,16 +55,14 @@ public class Puits {
      */
     public void setPieceSuivante(Piece piece) {
         if (this.pieceSuivante == null) {
-            // First time setting pieceActuelle, transitioning from null to an actual piece.
             this.pieceSuivante = piece;
-            this.pieceActuelle = piece;
-            pcs.firePropertyChange(MODIFICATION_PIECE_ACTUELLE, null, this.pieceActuelle);
         } else {
-            // Normal behavior once the initial setup has been handled.
             Piece oldPieceActuelle = this.pieceActuelle;
             this.pieceActuelle = this.pieceSuivante;
             this.pieceSuivante = piece;
             pcs.firePropertyChange(MODIFICATION_PIECE_ACTUELLE, oldPieceActuelle, this.pieceActuelle);
+
+            this.pieceActuelle.setPuits(this);
         }
 
         // Fire event for pieceSuivante in every case.
@@ -109,5 +107,17 @@ public class Puits {
 
     public Tas getTas() {
         return tas;
+    }
+
+    private void gererCollision() {
+        tas.ajouterElements(pieceActuelle);
+        setPieceSuivante(new UsineDePiece().genererPiece());
+    }
+
+    public void gravite() {
+        boolean moved = pieceActuelle.deplacerDe(0, 1);
+        if (!moved) {
+            gererCollision();
+        }
     }
 }

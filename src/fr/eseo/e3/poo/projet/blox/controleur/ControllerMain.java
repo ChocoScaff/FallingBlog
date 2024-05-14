@@ -23,7 +23,7 @@ public class ControllerMain {
 
             VuePuits vuePuits = new VuePuits(puits);
 
-            puits.getTas().construireTas(9, 3, new Random());
+            puits.getTas().construireTas(5, 1, new Random());
 
             VuePuitAffichage.Affichage(vuePuits);
         });
