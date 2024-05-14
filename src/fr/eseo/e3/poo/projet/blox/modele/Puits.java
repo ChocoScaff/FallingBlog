@@ -55,12 +55,8 @@ public class Puits {
      */
     public void setPieceSuivante(Piece piece) {
         if (this.pieceSuivante == null) {
-            // First time setting pieceActuelle, transitioning from null to an actual piece.
             this.pieceSuivante = piece;
-            this.pieceActuelle = piece;
-            pcs.firePropertyChange(MODIFICATION_PIECE_ACTUELLE, null, this.pieceActuelle);
         } else {
-            // Normal behavior once the initial setup has been handled.
             Piece oldPieceActuelle = this.pieceActuelle;
             this.pieceActuelle = this.pieceSuivante;
             this.pieceSuivante = piece;
