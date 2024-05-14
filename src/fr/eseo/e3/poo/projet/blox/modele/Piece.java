@@ -83,28 +83,51 @@ abstract public class Piece {
      * @param deltaOrdonnee
      */
     public boolean deplacerDe(int deltaAbscisse, int deltaOrdonnee) {
-         if (deltaOrdonnee < 0) {
+        if (deltaOrdonnee < 0) {
             throw new IllegalArgumentException("Invalid movement direction. Movement must be left, right, or down.");
         }
 
-        for (Element element : elements) {
-            int newX = element.getCoordonnes().getAbscisse() + deltaAbscisse;
-            int newY = element.getCoordonnes().getOrdonnee() + deltaOrdonnee;
+        int stepsX = Math.abs(deltaAbscisse);
+        int stepsY = Math.abs(deltaOrdonnee);
+        int directionX = (deltaAbscisse > 0) ? 1 : -1;
+        int directionY = (deltaOrdonnee > 0) ? 1 : -1;
 
-            if (newY < 0 || collisionDetected(newX, newY)) {
-                return false;
+        boolean moved = false;
+
+        for (int i = 0; i < stepsX; i++) {
+            for (Element element : elements) {
+                int newX = element.getCoordonnes().getAbscisse() + directionX;
+                int newY = element.getCoordonnes().getOrdonnee();
+                if (collisionDetected(newX, newY)) {
+                    return moved;
+                }
             }
+            for (Element element : elements) {
+                element.deplacerDe(directionX, 0);
+            }
+            moved = true;
         }
 
-        for (Element element : elements) {
-            element.deplacerDe(deltaAbscisse, deltaOrdonnee);
+        for (int i = 0; i < stepsY; i++) {
+            for (Element element : elements) {
+                int newX = element.getCoordonnes().getAbscisse();
+                int newY = element.getCoordonnes().getOrdonnee() + directionY;
+                if (collisionDetected(newX, newY)) {
+                    return moved;
+                }
+            }
+            for (Element element : elements) {
+                element.deplacerDe(0, directionY);
+            }
+            moved = true;
         }
 
-        return true;
+        return moved;
     }
 
+
     private boolean collisionDetected(int x, int y) {
-        if (x < 0 || x >= puits.getLargeur() || y >= puits.getProfondeur()) {
+        if (x < 0 || x >= puits.getLargeur() || y < 0 || y >= puits.getProfondeur()) {
             return true;
         }
 
@@ -117,31 +140,46 @@ abstract public class Piece {
         return false;
     }
 
+
+
     /**
      * @param sensHorraire
      */
-    public void tourner(boolean sensHorraire) {
+    public boolean tourner(boolean sensHorraire) {
         Coordonnees pivot = elements.get(0).getCoordonnes();  // Get pivot element's coordinates
-        int pivotAbscisse = pivot.getAbscisse();
-        int pivotOrdonnee = pivot.getOrdonnee();
+        int pivotX = pivot.getAbscisse();
+        int pivotY = pivot.getOrdonnee();
+
+        List<Coordonnees> newCoordinates = new ArrayList<>();
 
         for (Element element : elements) {
-            int abscisse = element.getCoordonnes().getAbscisse() - pivotAbscisse;
-            int ordonnee = element.getCoordonnes().getOrdonnee() - pivotOrdonnee;
+            int x = element.getCoordonnes().getAbscisse() - pivotX;
+            int y = element.getCoordonnes().getOrdonnee() - pivotY;
 
-            int nouveauAbscisse;
-            int nouveauOrdonnee;
+            int newX;
+            int newY;
 
             if (sensHorraire) {
-                // Rotation sensHorraire
-                nouveauAbscisse = -ordonnee + pivotAbscisse;
-                nouveauOrdonnee = abscisse + pivotOrdonnee;
+                // Rotate clockwise
+                newX = -y + pivotX;
+                newY = x + pivotY;
             } else {
-                // Rotation sensAntiHorraire
-                nouveauAbscisse = ordonnee + pivotAbscisse;
-                nouveauOrdonnee = -abscisse + pivotOrdonnee;
+                // Rotate counterclockwise
+                newX = y + pivotX;
+                newY = -x + pivotY;
             }
-            element.setCoordonnees(new Coordonnees(nouveauAbscisse, nouveauOrdonnee));
+
+            if (collisionDetected(newX, newY)) {
+                return false;
+            }
+
+            newCoordinates.add(new Coordonnees(newX, newY));
         }
+
+        for (int i = 0; i < elements.size(); i++) {
+            elements.get(i).setCoordonnees(newCoordinates.get(i));
+        }
+
+        return true;
     }
 }

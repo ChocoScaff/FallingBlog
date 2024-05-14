@@ -21,7 +21,8 @@ public class OPiece extends Piece {
     }
 
     @Override
-    public void tourner(boolean sensHorraire) {
+    public boolean tourner(boolean sensHorraire) {
         //OPiece ne peut pas tourner
+        return false;
     }
 }
