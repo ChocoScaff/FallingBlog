@@ -16,7 +16,6 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     private Puits puits;
     private final VueTas vueTas;
     private VuePiece vuePiece;
-    private final VuePiece vueNextPiece;
     private int tileSize;
 
     public VuePuits(Puits puits) {
@@ -27,7 +26,6 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         this.puits = puits;
         this.taille = taille;
         this.vuePiece = new VuePiece(puits.getPieceActuelle());
-        this.vueNextPiece = new VuePiece(puits.getPieceSuivante());
         setPreferredSize(new Dimension(taille, taille));
         setBackground(Color.WHITE);
         this.puits.addPropertyChangeListener(this); // Listen to property changes
@@ -66,9 +64,9 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
             vuePiece.afficherPiece(g2D, tileSize);
         }
 
-        if (vueNextPiece != null) {
-            vueNextPiece.afficherNextPiece(g2D, tileSize);
-        }
+        VuePiece vueNextPiece = new VuePiece(puits.getPieceSuivante());
+        vueNextPiece.afficherNextPiece(g2D, tileSize);
+
 
         if (vueTas != null) {
             vueTas.afficherTas(g2D, tileSize);

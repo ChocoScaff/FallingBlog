@@ -41,11 +41,11 @@ abstract public class Piece {
      */
     public void setPosition(int abscisse, int ordonnee) {
         Coordonnees ref = elements.get(0).getCoordonnes();
-        int deltaX = abscisse - ref.getAbscisse();
-        int deltaY = ordonnee - ref.getOrdonnee();
-        for (Element el : elements) {
-            Coordonnees coord = el.getCoordonnes();
-            el.setCoordonnees(new Coordonnees(coord.getAbscisse() + deltaX, coord.getOrdonnee() + deltaY));
+        int deltaAbscisse = abscisse - ref.getAbscisse();
+        int deltaOrdonnee = ordonnee - ref.getOrdonnee();
+        for (Element element : elements) {
+            Coordonnees coord = element.getCoordonnes();
+            element.setCoordonnees(new Coordonnees(coord.getAbscisse() + deltaAbscisse, coord.getOrdonnee() + deltaOrdonnee));
         }
     }
 
@@ -82,17 +82,39 @@ abstract public class Piece {
      * @param deltaAbscisse
      * @param deltaOrdonnee
      */
-    public void deplacerDe(int deltaAbscisse, int deltaOrdonnee) {
-
-        if (deltaOrdonnee < 0) {
+    public boolean deplacerDe(int deltaAbscisse, int deltaOrdonnee) {
+         if (deltaOrdonnee < 0) {
             throw new IllegalArgumentException("Invalid movement direction. Movement must be left, right, or down.");
         }
 
-        for (int i = 0; i < elements.size(); i++) {
-            Element element = elements.get(i);
+        for (Element element : elements) {
+            int newX = element.getCoordonnes().getAbscisse() + deltaAbscisse;
+            int newY = element.getCoordonnes().getOrdonnee() + deltaOrdonnee;
 
+            if (newY < 0 || collisionDetected(newX, newY)) {
+                return false;
+            }
+        }
+
+        for (Element element : elements) {
             element.deplacerDe(deltaAbscisse, deltaOrdonnee);
         }
+
+        return true;
+    }
+
+    private boolean collisionDetected(int x, int y) {
+        if (x < 0 || x >= puits.getLargeur() || y >= puits.getProfondeur()) {
+            return true;
+        }
+
+        for (Element element : puits.getTas().getElements()) {
+            if (element.getCoordonnes().getAbscisse() == x && element.getCoordonnes().getOrdonnee() == y) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -100,26 +122,26 @@ abstract public class Piece {
      */
     public void tourner(boolean sensHorraire) {
         Coordonnees pivot = elements.get(0).getCoordonnes();  // Get pivot element's coordinates
-        int pivotX = pivot.getAbscisse();
-        int pivotY = pivot.getOrdonnee();
+        int pivotAbscisse = pivot.getAbscisse();
+        int pivotOrdonnee = pivot.getOrdonnee();
 
         for (Element element : elements) {
-            int x = element.getCoordonnes().getAbscisse() - pivotX;
-            int y = element.getCoordonnes().getOrdonnee() - pivotY;
+            int abscisse = element.getCoordonnes().getAbscisse() - pivotAbscisse;
+            int ordonnee = element.getCoordonnes().getOrdonnee() - pivotOrdonnee;
 
-            int newX;
-            int newY;
+            int nouveauAbscisse;
+            int nouveauOrdonnee;
 
             if (sensHorraire) {
-                // Rotate clockwise
-                newX = -y + pivotX;
-                newY = x + pivotY;
+                // Rotation sensHorraire
+                nouveauAbscisse = -ordonnee + pivotAbscisse;
+                nouveauOrdonnee = abscisse + pivotOrdonnee;
             } else {
-                // Rotate counterclockwise
-                newX = y + pivotX;
-                newY = -x + pivotY;
+                // Rotation sensAntiHorraire
+                nouveauAbscisse = ordonnee + pivotAbscisse;
+                nouveauOrdonnee = -abscisse + pivotOrdonnee;
             }
-            element.setCoordonnees(new Coordonnees(newX, newY));
+            element.setCoordonnees(new Coordonnees(nouveauAbscisse, nouveauOrdonnee));
         }
     }
 }

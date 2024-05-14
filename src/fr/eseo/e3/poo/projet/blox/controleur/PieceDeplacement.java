@@ -91,7 +91,7 @@ public class PieceDeplacement implements MouseListener, MouseMotionListener, Mou
             vuePuits.repaint();
         }
         if (puits.getPieceActuelle() != null && mouseEvent.getWheelRotation() < 0) {
-            puits.getPieceActuelle().tourner(true);
+            puits.gravite();
             vuePuits.repaint();
         }
     }

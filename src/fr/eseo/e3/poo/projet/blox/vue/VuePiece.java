@@ -17,6 +17,10 @@ public class VuePiece extends JPanel {
         this.piece = piece;
     }
 
+    public Piece getPiece() {
+        return this.piece;
+    }
+
     public Color teinte(Color couleur) {
         int r = (int) (couleur.getRed() + (255 - couleur.getRed()) * MULTIPLIER_TEINTE);
         int g = (int) (couleur.getGreen() + (255 - couleur.getGreen()) * MULTIPLIER_TEINTE);
@@ -59,4 +63,6 @@ public class VuePiece extends JPanel {
         }
 
     }
+
+
 }

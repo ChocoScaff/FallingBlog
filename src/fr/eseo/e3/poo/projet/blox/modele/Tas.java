@@ -50,4 +50,10 @@ public class Tas {
     public Puits getPuits() {
         return puits;
     }
+
+    public void ajouterElements(Piece piece) {
+        for (Element element : piece.getElements()) {
+            elements.add(element);
+        }
+    }
 }
