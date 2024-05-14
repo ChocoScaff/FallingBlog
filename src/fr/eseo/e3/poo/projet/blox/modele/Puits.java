@@ -16,7 +16,7 @@ public class Puits {
     private Piece pieceActuelle;
     private Piece pieceSuivante;
     private final Tas tas;
-    private final PropertyChangeSupport pcs;
+    private final PropertyChangeSupport propertyChangeSupport;
 
     /**
      *
@@ -33,7 +33,7 @@ public class Puits {
         this.largeur = largeur;
         this.profondeur = profondeur;
         this.tas = new Tas(this);
-        this.pcs = new PropertyChangeSupport(this);
+        this.propertyChangeSupport = new PropertyChangeSupport(this);
     }
 
     /**
@@ -60,13 +60,13 @@ public class Puits {
             Piece oldPieceActuelle = this.pieceActuelle;
             this.pieceActuelle = this.pieceSuivante;
             this.pieceSuivante = piece;
-            pcs.firePropertyChange(MODIFICATION_PIECE_ACTUELLE, oldPieceActuelle, this.pieceActuelle);
+            propertyChangeSupport.firePropertyChange(MODIFICATION_PIECE_ACTUELLE, oldPieceActuelle, this.pieceActuelle);
 
             this.pieceActuelle.setPuits(this);
         }
 
         // Fire event for pieceSuivante in every case.
-        pcs.firePropertyChange(MODIFICATION_PIECE_SUIVANTE, null, this.pieceSuivante);
+        propertyChangeSupport.firePropertyChange(MODIFICATION_PIECE_SUIVANTE, null, this.pieceSuivante);
     }
 
     /**
@@ -98,11 +98,11 @@ public class Puits {
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
-        this.pcs.addPropertyChangeListener(listener);
+        this.propertyChangeSupport.addPropertyChangeListener(listener);
     }
 
     public void removePropertyChangeListener(PropertyChangeListener listener) {
-        this.pcs.removePropertyChangeListener(listener);
+        this.propertyChangeSupport.removePropertyChangeListener(listener);
     }
 
     public Tas getTas() {

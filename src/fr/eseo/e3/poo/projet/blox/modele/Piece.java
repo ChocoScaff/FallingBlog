@@ -139,10 +139,10 @@ abstract public class Piece {
     }
 
     /**
-     * @param sensHorraire
+     * @param rotation
      */
-    public boolean tourner(boolean sensHorraire) {
-        Coordonnees pivot = elements.get(0).getCoordonnes();  // Get pivot element's coordinates
+    public boolean tourner(Rotation rotation) {
+        Coordonnees pivot = elements.get(0).getCoordonnes();
         int pivotAbscisse = pivot.getAbscisse();
         int pivotOrdonnee = pivot.getOrdonnee();
 
@@ -155,12 +155,10 @@ abstract public class Piece {
             int newAbscisse;
             int newOrdonnee;
 
-            if (sensHorraire) {
-                // Rotate clockwise
+            if (rotation == Rotation.HORRAIRE) {
                 newAbscisse = -ordonnee + pivotAbscisse;
                 newOrdonnee = abscisse + pivotOrdonnee;
             } else {
-                // Rotate counterclockwise
                 newAbscisse = ordonnee + pivotAbscisse;
                 newOrdonnee = -abscisse + pivotOrdonnee;
             }

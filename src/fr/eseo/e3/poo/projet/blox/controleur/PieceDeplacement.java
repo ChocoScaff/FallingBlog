@@ -1,6 +1,7 @@
 package fr.eseo.e3.poo.projet.blox.controleur;
 
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import fr.eseo.e3.poo.projet.blox.modele.Rotation;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
 import javax.swing.*;
@@ -53,9 +54,9 @@ public class PieceDeplacement implements MouseListener, MouseMotionListener, Mou
         if (puits.getPieceActuelle() != null) {
             try {
                 if (SwingUtilities.isRightMouseButton(mouseEvent)) {
-                    puits.getPieceActuelle().tourner(true);
+                    puits.getPieceActuelle().tourner(Rotation.HORRAIRE);
                 } else if (SwingUtilities.isLeftMouseButton(mouseEvent)) {
-                    puits.getPieceActuelle().tourner(false);
+                    puits.getPieceActuelle().tourner(Rotation.ANTIHORRAIRE);
                 }
                 vuePuits.repaint(); //Todo: deplacer dans le GameLoop quand il serat fait
             } catch (Exception ex) {

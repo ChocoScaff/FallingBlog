@@ -2,6 +2,7 @@ package fr.eseo.e3.poo.projet.blox.vue;
 
 import fr.eseo.e3.poo.projet.blox.modele.Piece;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import fr.eseo.e3.poo.projet.blox.modele.Rotation;
 import fr.eseo.e3.poo.projet.blox.modele.UsineDePiece;
 
 
@@ -18,7 +19,7 @@ public class VueMain {
         VuePuitAffichage.Affichage(vuePuits);
 
         piece.deplacerDe(4, 0);
-        piece.tourner(true);
+        piece.tourner(Rotation.HORRAIRE);
 
     }
 
