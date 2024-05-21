@@ -93,6 +93,7 @@ abstract public class Piece {
 
         boolean moved = false;
 
+        //Mouvements en step de 1 par 1 pour une collision plus facile
         for (int i = 0; i < stepsAbscisse; i++) {
             for (Element element : elements) {
                 int newAbscisse = element.getCoordonnes().getAbscisse() + directionAbscisse;
@@ -125,13 +126,15 @@ abstract public class Piece {
     }
 
     private boolean collisionDetected(int abscisse, int ordonnee) {
-        if (abscisse < 0 || abscisse >= puits.getLargeur() || ordonnee < 0 || ordonnee >= puits.getProfondeur()) {
-            return true;
-        }
-
-        for (Element element : puits.getTas().getElements()) {
-            if (element.getCoordonnes().getAbscisse() == abscisse && element.getCoordonnes().getOrdonnee() == ordonnee) {
+        if (puits != null) {
+            if (abscisse < 0 || abscisse >= puits.getLargeur() || ordonnee < 0 || ordonnee >= puits.getProfondeur()) {
                 return true;
+            }
+
+            for (Element element : puits.getTas().getElements()) {
+                if (element.getCoordonnes().getAbscisse() == abscisse && element.getCoordonnes().getOrdonnee() == ordonnee) {
+                    return true;
+                }
             }
         }
 
@@ -152,13 +155,13 @@ abstract public class Piece {
             int abscisse = element.getCoordonnes().getAbscisse() - pivotAbscisse;
             int ordonnee = element.getCoordonnes().getOrdonnee() - pivotOrdonnee;
 
-            int newAbscisse;
-            int newOrdonnee;
+            int newAbscisse = -1;
+            int newOrdonnee = -1;
 
             if (rotation == Rotation.HORRAIRE) {
                 newAbscisse = -ordonnee + pivotAbscisse;
                 newOrdonnee = abscisse + pivotOrdonnee;
-            } else {
+            }else if (rotation == Rotation.ANTIHORRAIRE){
                 newAbscisse = ordonnee + pivotAbscisse;
                 newOrdonnee = -abscisse + pivotOrdonnee;
             }

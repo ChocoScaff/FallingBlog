@@ -62,10 +62,9 @@ public class Puits {
             this.pieceSuivante = piece;
             propertyChangeSupport.firePropertyChange(MODIFICATION_PIECE_ACTUELLE, oldPieceActuelle, this.pieceActuelle);
 
-            this.pieceActuelle.setPuits(this);
+            this.pieceActuelle.setPuits(this); //potentiel problem?
         }
 
-        // Fire event for pieceSuivante in every case.
         propertyChangeSupport.firePropertyChange(MODIFICATION_PIECE_SUIVANTE, null, this.pieceSuivante);
     }
 
@@ -109,15 +108,16 @@ public class Puits {
         return tas;
     }
 
-    private void gererCollision() {
-        tas.ajouterElements(pieceActuelle);
-        setPieceSuivante(new UsineDePiece().genererPiece());
-    }
-
     public void gravite() {
         boolean moved = pieceActuelle.deplacerDe(0, 1);
         if (!moved) {
             gererCollision();
         }
     }
+
+    private void gererCollision() {
+        tas.ajouterElements(pieceActuelle);
+        setPieceSuivante(new UsineDePiece().genererPiece());
+    }
+
 }

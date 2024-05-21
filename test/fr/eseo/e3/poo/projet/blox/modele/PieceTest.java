@@ -22,7 +22,7 @@ class PieceTest {
         Coordonnees coordonnee = new Coordonnees(2, 2);
         Piece piece = new LPiece(coordonnee, Couleur.CYAN);
 
-        piece.tourner(true);
+        piece.tourner(Rotation.HORRAIRE);
         Assertions.assertEquals(new Coordonnees(2, 2), piece.getElements().get(0).getCoordonnes());
         Assertions.assertEquals(new Coordonnees(3, 2), piece.getElements().get(1).getCoordonnes());
         Assertions.assertEquals(new Coordonnees(4, 2), piece.getElements().get(2).getCoordonnes());
@@ -34,7 +34,7 @@ class PieceTest {
         Coordonnees coordonnee = new Coordonnees(2, 2);
         Piece piece = new LPiece(coordonnee, Couleur.CYAN);
 
-        piece.tourner(false);
+        piece.tourner(Rotation.ANTIHORRAIRE);
         Assertions.assertEquals(new Coordonnees(2, 2), piece.getElements().get(0).getCoordonnes());
         Assertions.assertEquals(new Coordonnees(1, 2), piece.getElements().get(1).getCoordonnes());
         Assertions.assertEquals(new Coordonnees(0, 2), piece.getElements().get(2).getCoordonnes());
@@ -79,7 +79,7 @@ class PieceTest {
         Coordonnees coordonnee = new Coordonnees(2, 2);
         Piece piece = new OPiece(coordonnee, Couleur.CYAN);
 
-        piece.tourner(true);
+        piece.tourner(Rotation.HORRAIRE);
         Assertions.assertEquals(new Coordonnees(2, 2), piece.getElements().get(0).getCoordonnes());
         Assertions.assertEquals(new Coordonnees(3, 2), piece.getElements().get(1).getCoordonnes());
         Assertions.assertEquals(new Coordonnees(2, 1), piece.getElements().get(2).getCoordonnes());

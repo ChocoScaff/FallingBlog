@@ -24,8 +24,8 @@ class UsineDePieceTest {
         usineDePiece.setMode(UsineDePiece.Mode.ALEATOIRE_PIECE);
         assertEquals(UsineDePiece.Mode.ALEATOIRE_PIECE, usineDePiece.mode);
 
-        usineDePiece.setMode(UsineDePiece.Mode.CYCLIC);
-        assertEquals(UsineDePiece.Mode.CYCLIC, usineDePiece.mode);
+        usineDePiece.setMode(UsineDePiece.Mode.CYCLIQUE);
+        assertEquals(UsineDePiece.Mode.CYCLIQUE, usineDePiece.mode);
     }
 
     @RepeatedTest(10)
@@ -46,7 +46,7 @@ class UsineDePieceTest {
 
     @Test
     void genererPieceCyclicTest() {
-        usineDePiece.setMode(UsineDePiece.Mode.CYCLIC);
+        usineDePiece.setMode(UsineDePiece.Mode.CYCLIQUE);
         Piece piece1 = usineDePiece.genererPiece();
         assertNotNull(piece1);
         assertTrue(isValidPiece(piece1));
