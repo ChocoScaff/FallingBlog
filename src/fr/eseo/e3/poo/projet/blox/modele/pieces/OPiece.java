@@ -1,9 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.modele.pieces;
 
-import fr.eseo.e3.poo.projet.blox.modele.Coordonnees;
-import fr.eseo.e3.poo.projet.blox.modele.Couleur;
-import fr.eseo.e3.poo.projet.blox.modele.Element;
-import fr.eseo.e3.poo.projet.blox.modele.Piece;
+import fr.eseo.e3.poo.projet.blox.modele.*;
 
 
 public class OPiece extends Piece {
@@ -21,7 +18,8 @@ public class OPiece extends Piece {
     }
 
     @Override
-    public void tourner(boolean sensHorraire) {
+    public boolean tourner(Rotation rotation) {
         //OPiece ne peut pas tourner
+        return false;
     }
 }

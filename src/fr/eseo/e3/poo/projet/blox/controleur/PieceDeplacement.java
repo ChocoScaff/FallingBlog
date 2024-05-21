@@ -1,6 +1,7 @@
 package fr.eseo.e3.poo.projet.blox.controleur;
 
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import fr.eseo.e3.poo.projet.blox.modele.Rotation;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
 import javax.swing.*;
@@ -38,7 +39,7 @@ public class PieceDeplacement implements MouseListener, MouseMotionListener, Mou
                 try {
                     puits.getPieceActuelle().deplacerDe(columnDelta, 0);
                     lastColumn = currentMouseColumn;
-                    vuePuits.repaint(); //repaint la frame a chaque mouvment, peut etre le bouger ca plus tard
+                    vuePuits.repaint(); //Todo: deplacer dans le GameLoop quand il serat fait
                     System.out.println("Moved piece to column: " + currentMouseColumn);
                 } catch (Exception ex) {
                     System.out.println("Failed to move piece: " + ex.getMessage());
@@ -53,11 +54,11 @@ public class PieceDeplacement implements MouseListener, MouseMotionListener, Mou
         if (puits.getPieceActuelle() != null) {
             try {
                 if (SwingUtilities.isRightMouseButton(mouseEvent)) {
-                    puits.getPieceActuelle().tourner(true);
+                    puits.getPieceActuelle().tourner(Rotation.HORRAIRE);
                 } else if (SwingUtilities.isLeftMouseButton(mouseEvent)) {
-                    puits.getPieceActuelle().tourner(false);
+                    puits.getPieceActuelle().tourner(Rotation.ANTIHORRAIRE);
                 }
-                vuePuits.repaint();
+                vuePuits.repaint(); //Todo: deplacer dans le GameLoop quand il serat fait
             } catch (Exception ex) {
                 System.out.println("Rotation failed: " + ex.getMessage());
             }
@@ -91,7 +92,7 @@ public class PieceDeplacement implements MouseListener, MouseMotionListener, Mou
             vuePuits.repaint();
         }
         if (puits.getPieceActuelle() != null && mouseEvent.getWheelRotation() < 0) {
-            puits.gravite();
+            puits.gravite(); //Todo: activation manuel de gravite, a deplacer dans le GameLoop quand il serat fait
             vuePuits.repaint();
         }
     }
