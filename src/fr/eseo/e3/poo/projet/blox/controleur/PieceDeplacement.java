@@ -7,7 +7,7 @@ import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class PieceDeplacement implements MouseListener, MouseMotionListener, MouseWheelListener {
+public class PieceDeplacement implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
     private final VuePuits vuePuits;
     private final Puits puits;
     private int lastColumn = -1;
@@ -16,6 +16,9 @@ public class PieceDeplacement implements MouseListener, MouseMotionListener, Mou
         this.vuePuits = vuePuits;
         this.puits = puits;
         this.vuePuits.addMouseMotionListener(this);
+        this.vuePuits.addKeyListener(this);
+        this.vuePuits.setFocusable(true);
+        this.vuePuits.requestFocusInWindow();
     }
 
     @Override
@@ -91,6 +94,45 @@ public class PieceDeplacement implements MouseListener, MouseMotionListener, Mou
             puits.getPieceActuelle().deplacerDe(0, mouseEvent.getWheelRotation());
             vuePuits.repaint();
         }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent keyEvent) {
+        if (puits.getPieceActuelle() != null) {
+            try {
+                switch (keyEvent.getKeyCode()) {
+                    case KeyEvent.VK_LEFT:
+                        puits.getPieceActuelle().deplacerDe(-1, 0);
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        puits.getPieceActuelle().deplacerDe(1, 0);
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        puits.getPieceActuelle().deplacerDe(0, 1);
+                        break;
+                    case KeyEvent.VK_UP:
+                        puits.getPieceActuelle().tourner(Rotation.HORRAIRE);
+                        break;
+                    case KeyEvent.VK_SPACE:
+                        puits.getPieceActuelle().tourner(Rotation.HORRAIRE);
+                        break;
+                    default:
+                        break;
+                }
+                vuePuits.repaint();
+            } catch (Exception ex) {
+                System.out.println("Failed to process key event: " + ex.getMessage());
+            }
+        }
+    }
+    @Override
+    public void keyReleased(KeyEvent keyEvent) {
+        // Implement as needed
+    }
+
+    @Override
+    public void keyTyped(KeyEvent keyEvent) {
+        // Implement as needed
     }
 }
 
