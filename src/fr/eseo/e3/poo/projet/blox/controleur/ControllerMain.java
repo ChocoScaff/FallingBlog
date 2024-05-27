@@ -26,6 +26,9 @@ public class ControllerMain {
             puits.getTas().construireTas(5, 1, new Random());
 
             VuePuitAffichage.Affichage(vuePuits);
+
+            // Start the gravity mechanism
+            new Gravite(vuePuits);
         });
     }
 }

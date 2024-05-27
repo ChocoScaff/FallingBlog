@@ -9,7 +9,7 @@ public class ElementTest {
     public void testConstructorWithCoordinates() {
         Coordonnees coordonnees = new Coordonnees(1, 2);
         Element element = new Element(coordonnees);
-        assertEquals(coordonnees, element.getCoordonnes());
+        assertEquals(coordonnees, element.getCoordonnees());
     }
 
     @Test
@@ -17,7 +17,7 @@ public class ElementTest {
         Coordonnees coordonnees = new Coordonnees(1, 2);
         Couleur couleur = Couleur.ROUGE;
         Element element = new Element(coordonnees, couleur);
-        assertEquals(coordonnees, element.getCoordonnes());
+        assertEquals(coordonnees, element.getCoordonnees());
         assertEquals(couleur, element.getCouleur());
     }
 
@@ -26,7 +26,7 @@ public class ElementTest {
         Coordonnees coordonnees = new Coordonnees(1, 2);
         Couleur couleur = Couleur.ROUGE;
         Element element = new Element(1, 2, couleur);
-        assertEquals(coordonnees, element.getCoordonnes());
+        assertEquals(coordonnees, element.getCoordonnees());
         assertEquals(couleur, element.getCouleur());
     }
 
@@ -36,7 +36,7 @@ public class ElementTest {
         int ordonnee = 2;
         Element element = new Element(abscisse, ordonnee);
         Coordonnees coordonnees = new Coordonnees(abscisse, ordonnee);
-        assertEquals(coordonnees, element.getCoordonnes());
+        assertEquals(coordonnees, element.getCoordonnees());
     }
 
     @Test
@@ -44,7 +44,7 @@ public class ElementTest {
         Coordonnees coordonnees = new Coordonnees(1, 2);
         Element element = new Element(3, 4);
         element.setCoordonnees(coordonnees);
-        assertEquals(coordonnees, element.getCoordonnes());
+        assertEquals(coordonnees, element.getCoordonnees());
     }
 
     @Test

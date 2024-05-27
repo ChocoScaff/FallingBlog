@@ -45,7 +45,7 @@ public class Element {
     /**
      * @return
      */
-    public Coordonnees getCoordonnes() {
+    public Coordonnees getCoordonnees() {
         return this.coordonnees;
     }
 

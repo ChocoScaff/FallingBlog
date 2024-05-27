@@ -38,8 +38,8 @@ public class VuePiece extends JPanel {
             Color color = teinte(element.getCouleur().getCouleurPourAffichage());
             g2D.setColor(color);
 
-            int abs = element.getCoordonnes().getAbscisse();
-            int ord = element.getCoordonnes().getOrdonnee();
+            int abs = element.getCoordonnees().getAbscisse();
+            int ord = element.getCoordonnees().getOrdonnee();
 
             g2D.fill3DRect(abs * tileSize + MARGE, ord * tileSize + MARGE, tileSize, tileSize, true);
         }
@@ -56,8 +56,8 @@ public class VuePiece extends JPanel {
             Color color = teinte(element.getCouleur().getCouleurPourAffichage());
             g2D.setColor(color);
 
-            int abs = element.getCoordonnes().getAbscisse();
-            int ord = element.getCoordonnes().getOrdonnee();
+            int abs = element.getCoordonnees().getAbscisse();
+            int ord = element.getCoordonnees().getOrdonnee();
 
             g2D.fill3DRect(abs * tileSize + (15 * tileSize + MARGE), ord * tileSize + MARGE, tileSize, tileSize, true);
         }
