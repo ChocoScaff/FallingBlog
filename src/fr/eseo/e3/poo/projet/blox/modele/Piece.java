@@ -39,11 +39,11 @@ abstract public class Piece {
      * @param ordonnee
      */
     public void setPosition(int abscisse, int ordonnee) {
-        Coordonnees ref = elements.get(0).getCoordonnes();
+        Coordonnees ref = elements.get(0).getCoordonnees();
         int deltaAbscisse = abscisse - ref.getAbscisse();
         int deltaOrdonnee = ordonnee - ref.getOrdonnee();
         for (Element element : elements) {
-            Coordonnees coord = element.getCoordonnes();
+            Coordonnees coord = element.getCoordonnees();
             element.setCoordonnees(new Coordonnees(coord.getAbscisse() + deltaAbscisse, coord.getOrdonnee() + deltaOrdonnee));
         }
     }
@@ -96,8 +96,8 @@ abstract public class Piece {
         //Mouvements en step de 1 par 1 pour une collision plus facile
         for (int i = 0; i < stepsAbscisse; i++) {
             for (Element element : elements) {
-                int newAbscisse = element.getCoordonnes().getAbscisse() + directionAbscisse;
-                int newOrdonnee = element.getCoordonnes().getOrdonnee();
+                int newAbscisse = element.getCoordonnees().getAbscisse() + directionAbscisse;
+                int newOrdonnee = element.getCoordonnees().getOrdonnee();
                 if (collisionDetected(newAbscisse, newOrdonnee)) {
                     return moved;
                 }
@@ -110,8 +110,8 @@ abstract public class Piece {
 
         for (int i = 0; i < stepsOrdonnee; i++) {
             for (Element element : elements) {
-                int newAbscisse = element.getCoordonnes().getAbscisse();
-                int newOrdonnee = element.getCoordonnes().getOrdonnee() + directionOrdonnee;
+                int newAbscisse = element.getCoordonnees().getAbscisse();
+                int newOrdonnee = element.getCoordonnees().getOrdonnee() + directionOrdonnee;
                 if (collisionDetected(newAbscisse, newOrdonnee)) {
                     return moved;
                 }
@@ -132,7 +132,7 @@ abstract public class Piece {
             }
 
             for (Element element : puits.getTas().getElements()) {
-                if (element.getCoordonnes().getAbscisse() == abscisse && element.getCoordonnes().getOrdonnee() == ordonnee) {
+                if (element.getCoordonnees().getAbscisse() == abscisse && element.getCoordonnees().getOrdonnee() == ordonnee) {
                     return true;
                 }
             }
@@ -145,15 +145,15 @@ abstract public class Piece {
      * @param rotation
      */
     public boolean tourner(Rotation rotation) {
-        Coordonnees pivot = elements.get(0).getCoordonnes();
+        Coordonnees pivot = elements.get(0).getCoordonnees();
         int pivotAbscisse = pivot.getAbscisse();
         int pivotOrdonnee = pivot.getOrdonnee();
 
         List<Coordonnees> newCoordinates = new ArrayList<>();
 
         for (Element element : elements) {
-            int abscisse = element.getCoordonnes().getAbscisse() - pivotAbscisse;
-            int ordonnee = element.getCoordonnes().getOrdonnee() - pivotOrdonnee;
+            int abscisse = element.getCoordonnees().getAbscisse() - pivotAbscisse;
+            int ordonnee = element.getCoordonnees().getOrdonnee() - pivotOrdonnee;
 
             int newAbscisse = -1;
             int newOrdonnee = -1;

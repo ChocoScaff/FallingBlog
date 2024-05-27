@@ -27,7 +27,7 @@ public class PieceDeplacement implements MouseListener, MouseMotionListener, Mou
     public void mouseMoved(MouseEvent mouseEvent) {
         if (puits.getPieceActuelle() != null) {
             int currentMouseColumn = vuePuits.getColumnAt(mouseEvent.getX());
-            int pieceColumn = puits.getPieceActuelle().getElements().get(0).getCoordonnes().getAbscisse();
+            int pieceColumn = puits.getPieceActuelle().getElements().get(0).getCoordonnees().getAbscisse();
 
             System.out.println("Mouse X: " + mouseEvent.getX() + ", Column: " + currentMouseColumn);
             System.out.println("Piece Current Column: " + pieceColumn);
@@ -89,10 +89,6 @@ public class PieceDeplacement implements MouseListener, MouseMotionListener, Mou
     public void mouseWheelMoved(MouseWheelEvent mouseEvent) {
         if (puits.getPieceActuelle() != null && mouseEvent.getWheelRotation() > 0) {
             puits.getPieceActuelle().deplacerDe(0, mouseEvent.getWheelRotation());
-            vuePuits.repaint();
-        }
-        if (puits.getPieceActuelle() != null && mouseEvent.getWheelRotation() < 0) {
-            puits.gravite(); //Todo: activation manuel de gravite, a deplacer dans le GameLoop quand il serat fait
             vuePuits.repaint();
         }
     }

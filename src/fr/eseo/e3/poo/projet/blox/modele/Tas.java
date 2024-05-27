@@ -55,5 +55,31 @@ public class Tas {
         for (Element element : piece.getElements()) {
             elements.add(element);
         }
+        clearLines();
+    }
+
+    private void clearLines() {
+        int profondeur = puits.getProfondeur();
+        int largeur = puits.getLargeur();
+        Set<Integer> lignesCompletes = new HashSet<>();
+
+        for (int y = 0; y < profondeur; y++) {
+            int finalY = y;
+            long count = elements.stream().filter(element -> element.getCoordonnees().getOrdonnee() == finalY).count();
+            if (count == largeur) {
+                lignesCompletes.add(y);
+            }
+        }
+
+        if (!lignesCompletes.isEmpty()) {
+            elements.removeIf(element -> lignesCompletes.contains(element.getCoordonnees().getOrdonnee()));
+            for (int y : lignesCompletes) {
+                for (Element element : elements) {
+                    if (element.getCoordonnees().getOrdonnee() < y) {
+                        element.setCoordonnees(new Coordonnees(element.getCoordonnees().getAbscisse(), element.getCoordonnees().getOrdonnee() + 1));
+                    }
+                }
+            }
+        }
     }
 }
