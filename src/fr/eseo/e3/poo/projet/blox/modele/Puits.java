@@ -92,6 +92,10 @@ public class Puits {
 
     private void gererCollision() {
         tas.ajouterElements(pieceActuelle);
+
+        GameOver gameOver = new GameOver(this.getTas());
+
         setPieceSuivante(new UsineDePiece().genererPiece());
+
     }
 }
