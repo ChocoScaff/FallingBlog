@@ -3,7 +3,7 @@ package fr.eseo.e3.poo.projet.blox.controleur;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
-import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -38,7 +38,7 @@ public class Gravite implements ActionListener {
         this.timer.setDelay(periodicite);
     }
 
-    void applyGravity() {
+    private void applyGravity() {
         if (puits.getPieceActuelle() != null) {
             boolean moved = puits.getPieceActuelle().deplacerDe(0, 1);
             if (!moved) {

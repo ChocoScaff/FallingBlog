@@ -1,11 +1,7 @@
 package fr.eseo.e3.poo.projet.blox.controleur;
 
-import fr.eseo.e3.poo.projet.blox.modele.Piece;
-import fr.eseo.e3.poo.projet.blox.modele.Puits;
-import fr.eseo.e3.poo.projet.blox.modele.UsineDePiece;
-import fr.eseo.e3.poo.projet.blox.vue.VueGameOver;
-import fr.eseo.e3.poo.projet.blox.vue.VuePuitAffichage;
-import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
+import fr.eseo.e3.poo.projet.blox.modele.*;
+import fr.eseo.e3.poo.projet.blox.vue.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -44,7 +40,6 @@ public class GameLoop implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!isGameOver) {
-            gravite.applyGravity();
             vuePuits.repaint();
             checkGameOver();
         }
