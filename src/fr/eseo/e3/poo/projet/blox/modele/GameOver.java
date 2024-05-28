@@ -5,12 +5,24 @@ import java.util.List;
 
 public class GameOver {
 
-    private final List<Element> elements;
+    private Tas tas;
+    private List<Element> elements;
+    private Coordonnees coordonnees;
 
 
-    public GameOver(List<Element> elements) {
-        this.elements = elements;
-        System.out.println("Game over");
+    public GameOver(Tas tas) {
+        this.tas = tas;
+
+        this.elements =  this.tas.getElements();
+
+        for (Element element : elements) {
+
+            coordonnees = element.getCoordonnees();
+            if (coordonnees.getOrdonnee() == 3) {
+                System.out.println("Game Over");
+            }
+        }
+
     }
 
 }
