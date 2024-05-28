@@ -25,8 +25,8 @@ public class PieceTest {
         // Move right without collision
         boolean moved = piece.deplacerDe(1, 0);
         assertTrue(moved);
-        assertEquals(6, piece.getElements().get(0).getCoordonnes().getAbscisse());
-        assertEquals(5, piece.getElements().get(0).getCoordonnes().getOrdonnee());
+        assertEquals(6, piece.getElements().get(0).getCoordonnees().getAbscisse());
+        assertEquals(5, piece.getElements().get(0).getCoordonnees().getOrdonnee());
     }
 
     @Test
@@ -40,7 +40,7 @@ public class PieceTest {
 
         // Vérifier que les coordonnées de la pièce n'ont pas changé
         for (Element element : piece.getElements()) {
-            Assertions.assertTrue(element.getCoordonnes().getAbscisse() >= 0, "The X coordinate should not be negative");
+            assertTrue(element.getCoordonnees().getAbscisse() >= 0, "The X coordinate should not be negative");
         }
     }
 
@@ -52,8 +52,8 @@ public class PieceTest {
         // Move right with collision against the tas
         boolean moved = piece.deplacerDe(1, 0);
         assertFalse(moved);
-        assertEquals(5, piece.getElements().get(0).getCoordonnes().getAbscisse());
-        assertEquals(5, piece.getElements().get(0).getCoordonnes().getOrdonnee());
+        assertEquals(5, piece.getElements().get(0).getCoordonnees().getAbscisse());
+        assertEquals(5, piece.getElements().get(0).getCoordonnees().getOrdonnee());
     }
 
     @Test
