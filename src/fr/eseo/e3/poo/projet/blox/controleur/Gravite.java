@@ -3,7 +3,7 @@ package fr.eseo.e3.poo.projet.blox.controleur;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
-import javax.swing.Timer;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,8 +22,12 @@ public class Gravite implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.puits.gravite();
-        this.vuePuits.repaint();
+        if (!puits.isGameOver()) {
+            applyGravity();
+            this.vuePuits.repaint();
+        } else {
+            stop();
+        }
     }
 
     public int getPeriodicite() {
@@ -32,5 +36,18 @@ public class Gravite implements ActionListener {
 
     public void setPeriodicite(int periodicite) {
         this.timer.setDelay(periodicite);
+    }
+
+    void applyGravity() {
+        if (puits.getPieceActuelle() != null) {
+            boolean moved = puits.getPieceActuelle().deplacerDe(0, 1);
+            if (!moved) {
+                puits.gererCollision();
+            }
+        }
+    }
+
+    public void stop() {
+        this.timer.stop();
     }
 }

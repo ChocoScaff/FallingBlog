@@ -81,21 +81,22 @@ public class Puits {
         return tas;
     }
 
-    public void gravite() {
-        if (pieceActuelle != null) {
-            boolean moved = pieceActuelle.deplacerDe(0, 1);
-            if (!moved) {
-                gererCollision();
-            }
-        }
-    }
 
-    private void gererCollision() {
+    public void gererCollision() {
         tas.ajouterElements(pieceActuelle);
 
         GameOver gameOver = new GameOver(this.getTas());
 
         setPieceSuivante(new UsineDePiece().genererPiece());
 
+    }
+
+    public boolean isGameOver() {
+        for (Element element : tas.getElements()) {
+            if (element.getCoordonnees().getOrdonnee() <= 3) {
+                return true;
+            }
+        }
+        return false;
     }
 }
