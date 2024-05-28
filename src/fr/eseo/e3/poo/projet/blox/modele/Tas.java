@@ -1,10 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class Tas {
     private final Puits puits;
