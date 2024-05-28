@@ -7,6 +7,19 @@ import java.util.List;
 abstract public class Piece {
     protected Puits puits;
     protected List<Element> elements;
+    private int height;
+
+    public Piece() {
+        this.height = 0; // Initialisation par défaut
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
 
     /**
      * @param coordonnees

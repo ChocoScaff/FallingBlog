@@ -9,26 +9,17 @@ public class Puits {
     public static final String MODIFICATION_PIECE_ACTUELLE = "PieceActuelleChanged";
     public static final String MODIFICATION_PIECE_SUIVANTE = "PieceSuivanteChanged";
 
-
     private int largeur;
     private int profondeur;
-
     private Piece pieceActuelle;
     private Piece pieceSuivante;
     private final Tas tas;
     private final PropertyChangeSupport propertyChangeSupport;
 
-    /**
-     *
-     */
     public Puits() {
         this(LARGEUR_PAR_DEFAULT, PROFONDEUR_PAR_DEFAULT);
     }
 
-    /**
-     * @param largeur
-     * @param profondeur
-     */
     public Puits(int largeur, int profondeur) {
         this.largeur = largeur;
         this.profondeur = profondeur;
@@ -36,23 +27,14 @@ public class Puits {
         this.propertyChangeSupport = new PropertyChangeSupport(this);
     }
 
-    /**
-     * @return
-     */
     public Piece getPieceActuelle() {
         return this.pieceActuelle;
     }
 
-    /**
-     * @return
-     */
     public Piece getPieceSuivante() {
         return this.pieceSuivante;
     }
 
-    /**
-     * @param piece
-     */
     public void setPieceSuivante(Piece piece) {
         if (this.pieceSuivante == null) {
             this.pieceSuivante = piece;
@@ -61,37 +43,28 @@ public class Puits {
             this.pieceActuelle = this.pieceSuivante;
             this.pieceSuivante = piece;
             propertyChangeSupport.firePropertyChange(MODIFICATION_PIECE_ACTUELLE, oldPieceActuelle, this.pieceActuelle);
-
-            this.pieceActuelle.setPuits(this); //potentiel problem?
         }
-
         propertyChangeSupport.firePropertyChange(MODIFICATION_PIECE_SUIVANTE, null, this.pieceSuivante);
+
+        if (this.pieceActuelle == null) {
+            this.pieceActuelle = this.pieceSuivante;
+            this.pieceSuivante = piece;
+        }
+        this.pieceActuelle.setPuits(this);
     }
 
-    /**
-     * @return
-     */
     public int getLargeur() {
         return largeur;
     }
 
-    /**
-     * @return
-     */
     public int getProfondeur() {
         return profondeur;
     }
 
-    /**
-     * @param profondeur
-     */
     public void setProfondeur(int profondeur) {
         this.profondeur = profondeur;
     }
 
-    /**
-     * @param largeur
-     */
     public void setLargeur(int largeur) {
         this.largeur = largeur;
     }
@@ -109,9 +82,11 @@ public class Puits {
     }
 
     public void gravite() {
-        boolean moved = pieceActuelle.deplacerDe(0, 1);
-        if (!moved) {
-            gererCollision();
+        if (pieceActuelle != null) {
+            boolean moved = pieceActuelle.deplacerDe(0, 1);
+            if (!moved) {
+                gererCollision();
+            }
         }
     }
 
@@ -119,5 +94,4 @@ public class Puits {
         tas.ajouterElements(pieceActuelle);
         setPieceSuivante(new UsineDePiece().genererPiece());
     }
-
 }
