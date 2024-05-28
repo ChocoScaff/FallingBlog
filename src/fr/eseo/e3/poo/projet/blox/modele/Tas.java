@@ -26,20 +26,20 @@ public class Tas {
     }
 
     public void construireTas(int nbElements, int nbLignes, Random rand) {
+        int maxElements = puits.getLargeur() * nbLignes;
+        if (nbElements > maxElements) {
+            throw new IllegalArgumentException("Impossible de générer plus d'éléments uniques que l'espace disponible ne le permet.");
+        }
+
         Set<Coordonnees> usedCoordinates = new HashSet<>();
         while (elements.size() < nbElements) {
             int abs = rand.nextInt(puits.getLargeur());
             int ord = (puits.getProfondeur() - 1) - rand.nextInt(nbLignes);
             Coordonnees coord = new Coordonnees(abs, ord);
-            if (!usedCoordinates.contains(coord)) {
+            if (usedCoordinates.add(coord)) {
                 Element element = new Element(coord, Couleur.values()[rand.nextInt(Couleur.values().length)]);
                 elements.add(element);
-                usedCoordinates.add(coord);
             }
-        }
-
-        if (elements.size() < nbElements) {
-            throw new IllegalStateException("Could not generate the required number of elements with unique coordinates.");
         }
     }
 
@@ -58,7 +58,7 @@ public class Tas {
         clearLines();
     }
 
-    private void clearLines() {
+    void clearLines() {
         int profondeur = puits.getProfondeur();
         int largeur = puits.getLargeur();
         Set<Integer> lignesCompletes = new HashSet<>();
@@ -82,4 +82,5 @@ public class Tas {
             }
         }
     }
+
 }
