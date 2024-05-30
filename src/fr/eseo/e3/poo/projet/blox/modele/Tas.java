@@ -47,12 +47,22 @@ public class Tas {
         return puits;
     }
 
-    public void ajouterElements(Piece piece) {
+    public boolean ajouterElements(Piece piece) {
+        for (Element newElement : piece.getElements()) {
+            for (Element existingElement : elements) {
+                if (newElement.getCoordonnees().equals(existingElement.getCoordonnees())) {
+                    return false; // Collision detected, game over
+                }
+            }
+        }
+
         for (Element element : piece.getElements()) {
             elements.add(element);
         }
         clearLines();
+        return true;
     }
+
 
     void clearLines() {
         int profondeur = puits.getProfondeur();

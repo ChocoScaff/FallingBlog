@@ -71,6 +71,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         g2D.dispose();
     }
 
+
     @Override
     public void propertyChange(PropertyChangeEvent event) {
         if (Puits.MODIFICATION_PIECE_ACTUELLE.equals(event.getPropertyName())) {

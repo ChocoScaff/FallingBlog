@@ -23,10 +23,13 @@ public class UsineDePiece {
 
 
     public UsineDePiece() {
-        this.mode = Mode.ALEATOIRE_PIECE;
-        initializeFactories();
+        this(Mode.ALEATOIRE_PIECE);
     }
 
+    public UsineDePiece(Mode mode) {
+        this.mode = mode;
+        initializeFactories();
+    }
 
     private void initializeFactories() {
 
