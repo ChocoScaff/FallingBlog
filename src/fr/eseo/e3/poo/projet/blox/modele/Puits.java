@@ -88,8 +88,6 @@ public class Puits {
 
         if (!addedSuccessfully) {
             isGameOver = true;
-        } else {
-            setPieceSuivante(new UsineDePiece().genererPiece());
         }
     }
 

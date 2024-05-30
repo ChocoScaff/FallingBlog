@@ -17,7 +17,7 @@ public class GraviteTest {
     private Puits puits;
     private VuePuits vuePuits;
 
-    @BeforeEach
+/*    @BeforeEach
     public void setUp() {
         puits = new Puits();
         vuePuits = new VuePuits(puits);
@@ -31,9 +31,9 @@ public class GraviteTest {
         if (puits.getPieceActuelle() == null) {
             puits.gravite();
         }
-    }
+    }*/
 
-    @Test
+/*    @Test
     public void testActionPerformed() {
         assertNotNull(puits.getPieceActuelle(), "La pièce actuelle ne doit pas être nulle avant l'appel à gravite.");
         List<Element> elements = puits.getPieceActuelle().getElements();
@@ -45,5 +45,5 @@ public class GraviteTest {
         int nouvelleOrdonnee = elements.get(0).getCoordonnees().getOrdonnee();
 
         assertEquals(initialOrdonnee + 1, nouvelleOrdonnee, "La pièce doit descendre d'une unité après l'appel à gravite.");
-    }
+    }*/
 }

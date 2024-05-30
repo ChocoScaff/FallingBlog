@@ -1,12 +1,15 @@
 package fr.eseo.e3.poo.projet.blox.controleur;
 
-import fr.eseo.e3.poo.projet.blox.modele.*;
-import fr.eseo.e3.poo.projet.blox.vue.*;
+import fr.eseo.e3.poo.projet.blox.modele.Piece;
+import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import fr.eseo.e3.poo.projet.blox.modele.UsineDePiece;
+import fr.eseo.e3.poo.projet.blox.vue.VueGameOver;
+import fr.eseo.e3.poo.projet.blox.vue.VuePuitAffichage;
+import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 
 public class GameLoop implements ActionListener {
     private final Puits puits;
@@ -14,25 +17,22 @@ public class GameLoop implements ActionListener {
     private final Timer timer;
     private boolean isGameOver;
     private final Gravite gravite;
+    private final UsineDePiece usineDePiece;
 
-    public GameLoop() {
-        this.puits = new Puits();
-        UsineDePiece usineDePiece = new UsineDePiece();
+    public GameLoop(Puits puits, UsineDePiece.Mode mode, int gameSpeed) {
+        this.puits = puits;
+        this.usineDePiece = new UsineDePiece(mode);
 
-        Piece pieceActuelle = usineDePiece.genererPiece();
+        Piece pieceActuelle = this.usineDePiece.genererPiece();
         puits.setPieceSuivante(pieceActuelle);
-
-        Piece pieceSuivante = usineDePiece.genererPiece();
+        Piece pieceSuivante = this.usineDePiece.genererPiece();
         puits.setPieceSuivante(pieceSuivante);
 
         this.vuePuits = new VuePuits(puits);
-
-        puits.getTas().construireTas(5, 1, new Random());
-
         VuePuitAffichage.Affichage(vuePuits);
 
         this.gravite = new Gravite(vuePuits);
-        this.timer = new Timer(1000, this); // Set a 1-second delay for game loop
+        this.timer = new Timer(gameSpeed, this);
         this.timer.start();
         this.isGameOver = false;
     }
@@ -40,6 +40,7 @@ public class GameLoop implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!isGameOver) {
+            gravite.applyGravity();
             vuePuits.repaint();
             checkGameOver();
         }
@@ -54,7 +55,6 @@ public class GameLoop implements ActionListener {
     }
 
     private void stopGame() {
-        gravite.stop();
         timer.stop();
     }
 
@@ -68,9 +68,5 @@ public class GameLoop implements ActionListener {
                 frame.repaint();
             }
         });
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new GameLoop());
     }
 }
