@@ -15,6 +15,7 @@ public class Puits {
     private Piece pieceSuivante;
     private final Tas tas;
     private final PropertyChangeSupport propertyChangeSupport;
+    public boolean isGameOver = false;
 
     public Puits() {
         this(LARGEUR_PAR_DEFAULT, PROFONDEUR_PAR_DEFAULT);
@@ -83,20 +84,17 @@ public class Puits {
 
 
     public void gererCollision() {
-        tas.ajouterElements(pieceActuelle);
+        boolean addedSuccessfully = tas.ajouterElements(pieceActuelle);
 
-        GameOver gameOver = new GameOver(this.getTas());
-
-        setPieceSuivante(new UsineDePiece().genererPiece());
-
+        if (!addedSuccessfully) {
+            isGameOver = true;
+        } else {
+            setPieceSuivante(new UsineDePiece().genererPiece());
+        }
     }
 
     public boolean isGameOver() {
-        for (Element element : tas.getElements()) {
-            if (element.getCoordonnees().getOrdonnee() <= 3) {
-                return true;
-            }
-        }
-        return false;
+        return isGameOver;
     }
+
 }
