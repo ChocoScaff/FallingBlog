@@ -7,8 +7,8 @@ public class Gravite {
     private final Puits puits;
     private final UsineDePiece usineDePiece;
 
-    public Gravite(VuePuits vuePuits, UsineDePiece usineDePiece) {
-        this.puits = vuePuits.getPuits();
+    public Gravite(Puits puits, UsineDePiece usineDePiece) {
+        this.puits = puits;
         this.usineDePiece = usineDePiece;
     }
 
