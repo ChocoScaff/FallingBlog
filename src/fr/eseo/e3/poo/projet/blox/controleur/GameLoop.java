@@ -1,8 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.controleur;
 
-import fr.eseo.e3.poo.projet.blox.modele.Piece;
-import fr.eseo.e3.poo.projet.blox.modele.Puits;
-import fr.eseo.e3.poo.projet.blox.modele.UsineDePiece;
+import fr.eseo.e3.poo.projet.blox.modele.*;
 import fr.eseo.e3.poo.projet.blox.vue.VueGameOver;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuitAffichage;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
@@ -17,21 +15,20 @@ public class GameLoop implements ActionListener {
     private final Timer timer;
     private boolean isGameOver;
     private final Gravite gravite;
-    private final UsineDePiece usineDePiece;
 
     public GameLoop(Puits puits, UsineDePiece.Mode mode, int gameSpeed) {
         this.puits = puits;
-        this.usineDePiece = new UsineDePiece(mode);
+        UsineDePiece usineDePiece = new UsineDePiece(mode);
 
-        Piece pieceActuelle = this.usineDePiece.genererPiece();
+        Piece pieceActuelle = usineDePiece.genererPiece();
         puits.setPieceSuivante(pieceActuelle);
-        Piece pieceSuivante = this.usineDePiece.genererPiece();
+        Piece pieceSuivante = usineDePiece.genererPiece();
         puits.setPieceSuivante(pieceSuivante);
 
         this.vuePuits = new VuePuits(puits);
         VuePuitAffichage.Affichage(vuePuits);
 
-        this.gravite = new Gravite(vuePuits);
+        this.gravite = new Gravite(puits, usineDePiece);
         this.timer = new Timer(gameSpeed, this);
         this.timer.start();
         this.isGameOver = false;
@@ -40,7 +37,7 @@ public class GameLoop implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!isGameOver) {
-            gravite.applyGravity();
+            gravite.applyGravite();
             vuePuits.repaint();
             checkGameOver();
         }
@@ -63,7 +60,7 @@ public class GameLoop implements ActionListener {
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(vuePuits);
             if (frame != null) {
                 frame.getContentPane().removeAll();
-                frame.getContentPane().add(new VueGameOver());
+                frame.getContentPane().add(new VueGameOver(frame));
                 frame.revalidate();
                 frame.repaint();
             }
