@@ -20,6 +20,7 @@ public class VueMainMenu extends JFrame {
         setTitle("Main Menu");
         setSize(400, 600);
         setLayout(new GridBagLayout());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -47,66 +48,56 @@ public class VueMainMenu extends JFrame {
         JComboBox<UsineDePiece.Mode> modeComboBox = new JComboBox<>(UsineDePiece.Mode.values());
         add(modeComboBox, gbc);
 
-        // Tas parameters
+        // Number of elements in the pile (nbElementsTas)
         gbc.gridx = 0;
         gbc.gridy = 3;
-        add(new JLabel("Number of Elements in Tas:"), gbc);
+        add(new JLabel("Number of Elements in Pile:"), gbc);
         gbc.gridx = 1;
-        JTextField nbElementsField = new JTextField("0");
-        add(nbElementsField, gbc);
+        JTextField nbElementsTasField = new JTextField("0");
+        add(nbElementsTasField, gbc);
 
+        // Number of lines in the pile (nbLignesTas)
         gbc.gridx = 0;
         gbc.gridy = 4;
-        add(new JLabel("Number of Lines in Tas:"), gbc);
+        add(new JLabel("Number of Lines in Pile:"), gbc);
         gbc.gridx = 1;
-        JTextField nbLignesField = new JTextField("0");
-        add(nbLignesField, gbc);
+        JTextField nbLignesTasField = new JTextField("0");
+        add(nbLignesTasField, gbc);
 
-        // Game speed slider
+        // Game speed
         gbc.gridx = 0;
         gbc.gridy = 5;
-        add(new JLabel("Game Speed:"), gbc);
+        add(new JLabel("Game Speed (ms):"), gbc);
         gbc.gridx = 1;
-        JSlider speedSlider = new JSlider(JSlider.HORIZONTAL, 100, 2000, 1000);
-        speedSlider.setMajorTickSpacing(500);
-        speedSlider.setPaintTicks(true);
-        speedSlider.setPaintLabels(true);
-        add(speedSlider, gbc);
+        JTextField gameSpeedField = new JTextField("1000");
+        add(gameSpeedField, gbc);
 
-        // Play button
+        // Start button
         gbc.gridx = 0;
         gbc.gridy = 6;
         gbc.gridwidth = 2;
-        JButton playButton = new JButton("Play");
-        add(playButton, gbc);
-
-        playButton.addActionListener(new ActionListener() {
+        JButton startButton = new JButton("Start Game");
+        startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int largeur = Integer.parseInt(largeurField.getText());
                 int profondeur = Integer.parseInt(profondeurField.getText());
                 UsineDePiece.Mode mode = (UsineDePiece.Mode) modeComboBox.getSelectedItem();
-                int nbElements = Integer.parseInt(nbElementsField.getText());
-                int nbLignes = Integer.parseInt(nbLignesField.getText());
-                int speed = speedSlider.getValue();
+                int nbElementsTas = Integer.parseInt(nbElementsTasField.getText());
+                int nbLignesTas = Integer.parseInt(nbLignesTasField.getText());
+                int gameSpeed = Integer.parseInt(gameSpeedField.getText());
 
                 mainMenu.setLargeurPuits(largeur);
                 mainMenu.setProfondeurPuits(profondeur);
                 mainMenu.setModeUsineDePiece(mode);
-                mainMenu.setNbElementsTas(nbElements);
-                mainMenu.setNbLignesTas(nbLignes);
-                mainMenu.setGameSpeed(speed);
+                mainMenu.setNbElementsTas(nbElementsTas);
+                mainMenu.setNbLignesTas(nbLignesTas);
+                mainMenu.setGameSpeed(gameSpeed);
 
-                dispose();
                 mainMenu.startGame();
+                dispose();  // Close the main menu window
             }
         });
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new VueMainMenu());
+        add(startButton, gbc);
     }
 }
