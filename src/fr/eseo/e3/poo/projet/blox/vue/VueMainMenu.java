@@ -67,7 +67,7 @@ public class VueMainMenu extends JFrame {
         // Game speed
         gbc.gridx = 0;
         gbc.gridy = 5;
-        add(new JLabel("Game Speed (ms):"), gbc);
+        add(new JLabel("Game Tick Duration (ms):"), gbc);
         gbc.gridx = 1;
         JTextField gameSpeedField = new JTextField("1000");
         add(gameSpeedField, gbc);

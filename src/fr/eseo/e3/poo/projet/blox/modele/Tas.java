@@ -23,7 +23,7 @@ public class Tas {
 
     public void construireTas(int nbElements, int nbLignes, Random rand) {
         int maxElements = puits.getLargeur() * nbLignes;
-        if (nbElements > maxElements) {
+        if (nbElements >= maxElements && nbElements != 0) {
             throw new IllegalArgumentException("Impossible de générer plus d'éléments uniques que l'espace disponible ne le permet.");
         }
 
@@ -67,21 +67,24 @@ public class Tas {
     void clearLines() {
         int profondeur = puits.getProfondeur();
         int largeur = puits.getLargeur();
-        Set<Integer> lignesCompletes = new HashSet<>();
 
-        for (int y = 0; y < profondeur; y++) {
-            int finalY = y;
-            long count = elements.stream().filter(element -> element.getCoordonnees().getOrdonnee() == finalY).count();
-            if (count == largeur) {
-                lignesCompletes.add(y);
+        for (int ord = 0; ord < profondeur; ord++) {
+            List<Element> toRemove = new ArrayList<>();
+            long count = 0;
+            for (Element element : elements) {
+                if (element.getCoordonnees().getOrdonnee() == ord) {
+                    count++;
+                }
             }
-        }
-
-        if (!lignesCompletes.isEmpty()) {
-            elements.removeIf(element -> lignesCompletes.contains(element.getCoordonnees().getOrdonnee()));
-            for (int y : lignesCompletes) {
+            if (count == largeur) {
                 for (Element element : elements) {
-                    if (element.getCoordonnees().getOrdonnee() < y) {
+                    if (element.getCoordonnees().getOrdonnee() == ord) {
+                        toRemove.add(element);
+                    }
+                }
+                elements.removeAll(toRemove);
+                for (Element element : elements) {
+                    if (element.getCoordonnees().getOrdonnee() < ord) {
                         element.setCoordonnees(new Coordonnees(element.getCoordonnees().getAbscisse(), element.getCoordonnees().getOrdonnee() + 1));
                     }
                 }

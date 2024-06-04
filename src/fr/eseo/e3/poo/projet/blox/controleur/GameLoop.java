@@ -1,6 +1,8 @@
 package fr.eseo.e3.poo.projet.blox.controleur;
 
-import fr.eseo.e3.poo.projet.blox.modele.*;
+import fr.eseo.e3.poo.projet.blox.modele.Piece;
+import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import fr.eseo.e3.poo.projet.blox.modele.UsineDePiece;
 import fr.eseo.e3.poo.projet.blox.vue.VueGameOver;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuitAffichage;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
