@@ -32,20 +32,20 @@ public class PieceDeplacement implements MouseListener, MouseMotionListener, Mou
             int currentMouseColumn = vuePuits.getColumnAt(mouseEvent.getX());
             int pieceColumn = puits.getPieceActuelle().getElements().get(0).getCoordonnees().getAbscisse();
 
-            System.out.println("Mouse X: " + mouseEvent.getX() + ", Column: " + currentMouseColumn);
-            System.out.println("Piece Current Column: " + pieceColumn);
+            //System.out.println("Mouse X: " + mouseEvent.getX() + ", Column: " + currentMouseColumn);
+            //System.out.println("Piece Current Column: " + pieceColumn);
 
             int columnDelta = currentMouseColumn - pieceColumn;
-            System.out.println("Column Delta: " + columnDelta);
+            //System.out.println("Column Delta: " + columnDelta);
 
             if (columnDelta != 0) {
                 try {
                     puits.getPieceActuelle().deplacerDe(columnDelta, 0);
                     lastColumn = currentMouseColumn;
                     vuePuits.repaint(); //Todo: deplacer dans le GameLoop quand il serat fait
-                    System.out.println("Moved piece to column: " + currentMouseColumn);
+                    //System.out.println("Moved piece to column: " + currentMouseColumn);
                 } catch (Exception ex) {
-                    System.out.println("Failed to move piece: " + ex.getMessage());
+                    //System.out.println("Failed to move piece: " + ex.getMessage());
                 }
             }
         }
