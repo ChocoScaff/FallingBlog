@@ -18,8 +18,7 @@ public class Gravite {
             if (!moved) {
                 puits.gererCollision();
                 if (!puits.isGameOver()) {
-                    UsineDePiece usineDePiece = new UsineDePiece();
-                    Piece pieceSuivante = usineDePiece.genererPiece();
+                    Piece pieceSuivante = puits.getPieceSuivante();
                     puits.setPieceSuivante(pieceSuivante);
                 }
             }

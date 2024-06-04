@@ -37,7 +37,6 @@ public class MainMenu {
 
     public void startGame() {
         Puits puits = new Puits(largeurPuits, profondeurPuits);
-        UsineDePiece usineDePiece = new UsineDePiece(modeUsineDePiece);
 
         puits.getTas().construireTas(nbElementsTas, nbLignesTas, new java.util.Random());
 
