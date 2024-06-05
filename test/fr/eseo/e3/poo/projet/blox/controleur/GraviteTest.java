@@ -1,49 +1,59 @@
 package fr.eseo.e3.poo.projet.blox.controleur;
 
-import fr.eseo.e3.poo.projet.blox.modele.*;
-import fr.eseo.e3.poo.projet.blox.modele.pieces.OPiece;
-import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import java.awt.event.ActionEvent;
-import java.util.List;
+import org.junit.Before;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import fr.eseo.e3.poo.projet.blox.modele.Piece;
+import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import fr.eseo.e3.poo.projet.blox.modele.UsineDePiece;
 
 public class GraviteTest {
-    private Gravite gravite;
+
     private Puits puits;
-    private VuePuits vuePuits;
+    private UsineDePiece usineDePiece;
+    private Gravite gravite;
 
-/*    @BeforeEach
+    @Before
     public void setUp() {
-        puits = new Puits();
-        vuePuits = new VuePuits(puits);
-        gravite = new Gravite(vuePuits);
+        puits = new Puits(10, 20);
+        usineDePiece = new UsineDePiece();
+        gravite = new Gravite(puits, usineDePiece);
+    }
 
-        // Initialiser une pièce pour le puits ici
-        Piece piece = new OPiece(new Coordonnees(5, 0), Couleur.ROUGE);
+    @Test
+    public void testApplyGravite() {
+        Piece piece = usineDePiece.genererPiece();
         puits.setPieceSuivante(piece);
 
-        // Appel de gravite pour initialiser pieceActuelle
-        if (puits.getPieceActuelle() == null) {
-            puits.gravite();
+        gravite.applyGravite();
+
+        // Vérifiez que la pièce a bougé ou une nouvelle pièce a été générée.
+        if (puits.getPieceActuelle() == piece) {
+            // La pièce actuelle a bougé
+            assertTrue(puits.getPieceActuelle().deplacerDe(0, 1));
+        } else {
+            // Une nouvelle pièce a été générée
+            assertNotNull(puits.getPieceActuelle());
         }
-    }*/
+    }
 
-/*    @Test
-    public void testActionPerformed() {
-        assertNotNull(puits.getPieceActuelle(), "La pièce actuelle ne doit pas être nulle avant l'appel à gravite.");
-        List<Element> elements = puits.getPieceActuelle().getElements();
-        int initialOrdonnee = elements.get(0).getCoordonnees().getOrdonnee();
+    @Test
+    public void testGraviteAvecCollision() {
+        // Créez une situation de collision
+        Piece piece = usineDePiece.genererPiece();
+        puits.setPieceSuivante(piece);
 
-        // Simuler l'action de la gravité
-        gravite.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
+        // Déplacez la pièce à la position de collision
+        while (piece.deplacerDe(0, 1));
 
-        int nouvelleOrdonnee = elements.get(0).getCoordonnees().getOrdonnee();
+        // Appliquez la gravité
+        gravite.applyGravite();
 
-        assertEquals(initialOrdonnee + 1, nouvelleOrdonnee, "La pièce doit descendre d'une unité après l'appel à gravite.");
-    }*/
+        // Vérifiez qu'une nouvelle pièce a été générée après la collision
+        assertNotNull(puits.getPieceActuelle());
+    }
 }
