@@ -37,15 +37,26 @@ public class PieceDeplacementTest {
             @Override
             protected void setElements(Coordonnees coordonnees, Couleur couleur) {
                 elements.add(new Element(coordonnees, couleur));
+                elements.add(new Element(coordonnees.deplacerDe(1, 0), couleur));
+                elements.add(new Element(coordonnees.deplacerDe(0, 1), couleur));
+                elements.add(new Element(coordonnees.deplacerDe(1, 1), couleur));
             }
         };
-        puits.setPieceSuivante(piece); // Utiliser setPieceSuivante pour définir la pièce actuelle
+        puits.setPieceSuivante(piece);
+        puits.setPieceSuivante(new Piece(new Coordonnees(3, 1), Couleur.ROUGE) {
+            @Override
+            protected void setElements(Coordonnees coordonnees, Couleur couleur) {
+                elements.add(new Element(coordonnees, couleur));
+                elements.add(new Element(coordonnees.deplacerDe(1, 0), couleur));
+                elements.add(new Element(coordonnees.deplacerDe(0, 1), couleur));
+                elements.add(new Element(coordonnees.deplacerDe(1, 1), couleur));
+            }
+        }); // Set another piece as next to trigger the current piece setup
     }
 
     @Test
     public void testMouseMoved() {
-        // Initialisez VuePuits avec des dimensions non nulles
-        vuePuits.setSize(200, 400);  // Assurez-vous que la largeur et la hauteur sont définies
+        vuePuits.setSize(200, 400); // Assurez-vous que la largeur et la hauteur sont définies
 
         MouseEvent mouseEvent = new MouseEvent(vuePuits, 0, 0, 0, 100, 0, 1, false);
         vuePuits.dispatchEvent(mouseEvent);
@@ -100,6 +111,18 @@ public class PieceDeplacementTest {
             @Override
             protected void setElements(Coordonnees coordonnees, Couleur couleur) {
                 elements.add(new Element(coordonnees, couleur));
+                elements.add(new Element(coordonnees.deplacerDe(1, 0), couleur));
+                elements.add(new Element(coordonnees.deplacerDe(0, 1), couleur));
+                elements.add(new Element(coordonnees.deplacerDe(1, 1), couleur));
+            }
+        });
+        puits.setPieceSuivante(new Piece(new Coordonnees(3, 1), Couleur.ROUGE) {
+            @Override
+            protected void setElements(Coordonnees coordonnees, Couleur couleur) {
+                elements.add(new Element(coordonnees, couleur));
+                elements.add(new Element(coordonnees.deplacerDe(1, 0), couleur));
+                elements.add(new Element(coordonnees.deplacerDe(0, 1), couleur));
+                elements.add(new Element(coordonnees.deplacerDe(1, 1), couleur));
             }
         });
         originalCoords = getCoordonneesList(puits.getPieceActuelle().getElements());
@@ -125,8 +148,13 @@ public class PieceDeplacementTest {
         MouseEvent leftClickEvent = new MouseEvent(vuePuits, MouseEvent.MOUSE_CLICKED, System.currentTimeMillis(), 0, 0, 0, 1, false, MouseEvent.BUTTON1);
 
         List<Coordonnees> originalCoords = getCoordonneesList(puits.getPieceActuelle().getElements());
+        System.out.println("Original Coords: " + originalCoords); // Ajouté pour le débogage
+
         assertDoesNotThrow(() -> pieceDeplacement.mouseClicked(leftClickEvent));
+
         List<Coordonnees> newCoords = getCoordonneesList(puits.getPieceActuelle().getElements());
+        System.out.println("New Coords after rotation: " + newCoords); // Ajouté pour le débogage
+
         assertTrue(hasRotated(originalCoords, newCoords, Rotation.ANTIHORRAIRE));
     }
 
@@ -135,20 +163,27 @@ public class PieceDeplacementTest {
     }
 
     private boolean hasRotated(List<Coordonnees> originalCoords, List<Coordonnees> newCoords, Rotation rotation) {
+        Coordonnees pivot = originalCoords.get(0);
         for (int i = 0; i < originalCoords.size(); i++) {
             Coordonnees original = originalCoords.get(i);
             Coordonnees newCoord = newCoords.get(i);
-            int deltaX = newCoord.getAbscisse() - original.getAbscisse();
-            int deltaY = newCoord.getOrdonnee() - original.getOrdonnee();
+            int relativeX = original.getAbscisse() - pivot.getAbscisse();
+            int relativeY = original.getOrdonnee() - pivot.getOrdonnee();
+
+            int expectedX, expectedY;
 
             if (rotation == Rotation.HORRAIRE) {
-                if (!(deltaX == -original.getOrdonnee() && deltaY == original.getAbscisse())) {
-                    return false;
-                }
+                expectedX = pivot.getAbscisse() - relativeY;
+                expectedY = pivot.getOrdonnee() + relativeX;
             } else if (rotation == Rotation.ANTIHORRAIRE) {
-                if (!(deltaX == original.getOrdonnee() && deltaY == -original.getAbscisse())) {
-                    return false;
-                }
+                expectedX = pivot.getAbscisse() + relativeY;
+                expectedY = pivot.getOrdonnee() - relativeX;
+            } else {
+                return false; // Rotation inconnue
+            }
+
+            if (newCoord.getAbscisse() != expectedX || newCoord.getOrdonnee() != expectedY) {
+                return false;
             }
         }
         return true;

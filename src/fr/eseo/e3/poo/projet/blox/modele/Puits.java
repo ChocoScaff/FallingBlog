@@ -89,7 +89,9 @@ public class Puits {
     public void gererCollision() {
         boolean addedSuccessfully = tas.ajouterElements(pieceActuelle);
 
-        if (!addedSuccessfully) {
+        if (addedSuccessfully) {
+            pieceActuelle = null;
+        } else {
             isGameOver = true;
         }
     }
