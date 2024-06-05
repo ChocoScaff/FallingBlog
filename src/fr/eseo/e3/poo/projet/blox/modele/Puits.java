@@ -22,6 +22,9 @@ public class Puits {
     }
 
     public Puits(int largeur, int profondeur) {
+        if (largeur > profondeur/2 || profondeur > 50) {
+            throw new IllegalArgumentException("Dimmensions incorrect.");
+        }
         this.largeur = largeur;
         this.profondeur = profondeur;
         this.tas = new Tas(this);

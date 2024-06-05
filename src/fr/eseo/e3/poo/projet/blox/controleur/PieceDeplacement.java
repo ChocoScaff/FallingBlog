@@ -42,7 +42,7 @@ public class PieceDeplacement implements MouseListener, MouseMotionListener, Mou
                 try {
                     puits.getPieceActuelle().deplacerDe(columnDelta, 0);
                     lastColumn = currentMouseColumn;
-                    vuePuits.repaint(); //Todo: deplacer dans le GameLoop quand il serat fait
+                    vuePuits.repaint();
                     //System.out.println("Moved piece to column: " + currentMouseColumn);
                 } catch (Exception ex) {
                     //System.out.println("Failed to move piece: " + ex.getMessage());
@@ -61,7 +61,7 @@ public class PieceDeplacement implements MouseListener, MouseMotionListener, Mou
                 } else if (SwingUtilities.isLeftMouseButton(mouseEvent)) {
                     puits.getPieceActuelle().tourner(Rotation.ANTIHORRAIRE);
                 }
-                vuePuits.repaint(); //Todo: deplacer dans le GameLoop quand il serat fait
+                vuePuits.repaint();
             } catch (Exception ex) {
                 System.out.println("Rotation failed: " + ex.getMessage());
             }
