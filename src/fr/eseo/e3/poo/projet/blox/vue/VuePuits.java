@@ -94,8 +94,24 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     }
 
     public int getColumnAt(int x) {
-        return (x - MARGE) / tileSize;
+        int columnWidth = getColumnWidth();
+        if (columnWidth == 0) {
+            throw new IllegalArgumentException("Column width cannot be zero.");
+        }
+        return x / columnWidth;
     }
+
+    public int getColumnWidth() {
+        // Supposons que cette méthode retourne la largeur d'une colonne
+        // Vous devez vous assurer que cette méthode ne retourne jamais zéro.
+        return this.getWidth() / this.getColumnCount(); // Exemple de calcul de la largeur de colonne
+    }
+
+    public int getColumnCount() {
+        // Retourne le nombre de colonnes
+        return this.getWidth() > 0 ? Math.max(1, this.getWidth() / 20) : 1; // Assurez-vous de ne jamais retourner zéro
+    }
+
 
     public int getRowAt(int y) {
         return (y - MARGE) / tileSize;

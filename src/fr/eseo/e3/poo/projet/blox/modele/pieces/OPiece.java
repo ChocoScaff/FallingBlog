@@ -18,8 +18,7 @@ public class OPiece extends Piece {
     }
 
     @Override
-    public boolean tourner(Rotation rotation) {
+    public void tourner(Rotation rotation) {
         //OPiece ne peut pas tourner
-        return false;
     }
 }

@@ -157,7 +157,7 @@ abstract public class Piece {
     /**
      * @param rotation
      */
-    public boolean tourner(Rotation rotation) {
+    public void tourner(Rotation rotation) {
         Coordonnees pivot = elements.get(0).getCoordonnees();
         int pivotAbscisse = pivot.getAbscisse();
         int pivotOrdonnee = pivot.getOrdonnee();
@@ -168,19 +168,21 @@ abstract public class Piece {
             int abscisse = element.getCoordonnees().getAbscisse() - pivotAbscisse;
             int ordonnee = element.getCoordonnees().getOrdonnee() - pivotOrdonnee;
 
-            int newAbscisse = -1;
-            int newOrdonnee = -1;
+            int newAbscisse;
+            int newOrdonnee;
 
             if (rotation == Rotation.HORRAIRE) {
-                newAbscisse = -ordonnee + pivotAbscisse;
-                newOrdonnee = abscisse + pivotOrdonnee;
-            }else if (rotation == Rotation.ANTIHORRAIRE){
-                newAbscisse = ordonnee + pivotAbscisse;
-                newOrdonnee = -abscisse + pivotOrdonnee;
+                newAbscisse = pivotAbscisse - ordonnee;
+                newOrdonnee = pivotOrdonnee + abscisse;
+            } else if (rotation == Rotation.ANTIHORRAIRE) {
+                newAbscisse = pivotAbscisse + ordonnee;
+                newOrdonnee = pivotOrdonnee - abscisse;
+            } else {
+                return; // Unknown rotation type
             }
 
             if (collisionDetected(newAbscisse, newOrdonnee)) {
-                return false;
+                return;
             }
 
             newCoordinates.add(new Coordonnees(newAbscisse, newOrdonnee));
@@ -190,6 +192,6 @@ abstract public class Piece {
             elements.get(i).setCoordonnees(newCoordinates.get(i));
         }
 
-        return true;
     }
+
 }
