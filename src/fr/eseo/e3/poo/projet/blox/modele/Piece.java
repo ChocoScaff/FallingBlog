@@ -181,17 +181,26 @@ abstract public class Piece {
                 return; // Unknown rotation type
             }
 
-            if (collisionDetected(newAbscisse, newOrdonnee)) {
+            newCoordinates.add(new Coordonnees(newAbscisse, newOrdonnee));
+        }
+
+        // Vérifiez les collisions avant de définir les nouvelles coordonnées
+        for (Coordonnees coord : newCoordinates) {
+            if (collisionDetected(coord.getAbscisse(), coord.getOrdonnee())) {
                 return;
             }
-
-            newCoordinates.add(new Coordonnees(newAbscisse, newOrdonnee));
         }
 
         for (int i = 0; i < elements.size(); i++) {
             elements.get(i).setCoordonnees(newCoordinates.get(i));
         }
-
     }
 
+    private List<Coordonnees> getCoordonneesList(List<Element> elements) {
+        List<Coordonnees> coordList = new ArrayList<>();
+        for (Element element : elements) {
+            coordList.add(element.getCoordonnees());
+        }
+        return coordList;
+    }
 }
