@@ -93,7 +93,14 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         repaint();
     }
 
-    public int getColumnAt(int x) { return (x - MARGE) / tileSize;}
+    public int getColumnAt(int x) {
+        if(tileSize != 0){
+            return (x - MARGE) / tileSize;
+        }else {
+            return (x - MARGE) / 10;
+        }
+
+    }
 
     public int getRowAt(int y) {
         return (y - MARGE) / tileSize;

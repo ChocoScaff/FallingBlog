@@ -58,7 +58,7 @@ public class PieceDeplacementTest {
     public void testMouseMoved() {
         vuePuits.setSize(200, 400);
 
-        MouseEvent mouseEvent = new MouseEvent(vuePuits, 0, 0, 0, 100, 0, 1, false);
+        MouseEvent mouseEvent = new MouseEvent(vuePuits, 0, 0, 0, 100, 100, 1, false);
         vuePuits.dispatchEvent(mouseEvent);
 
         int currentMouseColumn = vuePuits.getColumnAt(mouseEvent.getX());
