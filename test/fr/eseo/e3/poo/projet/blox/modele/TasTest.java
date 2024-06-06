@@ -30,7 +30,6 @@ public class TasTest {
 
     @Test
     public void testClearLines() {
-        // Remplir la dernière ligne
         for (int x = 0; x < puits.getLargeur(); x++) {
             tas.getElements().add(new Element(new Coordonnees(x, puits.getProfondeur() - 1), Couleur.ROUGE));
         }
@@ -49,11 +48,10 @@ public class TasTest {
 
     @Test
     public void testConstruireTasAvecLignes() {
-        int nbElements = 29; // Assurez-vous que ce nombre est inférieur ou égal à puits.getLargeur() * nbLignes
+        int nbElements = 29;
         int nbLignes = 3;
         tas = new Tas(puits, nbElements, nbLignes);
 
-        // Vérifier que tous les éléments sont dans les lignes spécifiées
         for (Element element : tas.getElements()) {
             assertTrue(element.getCoordonnees().getOrdonnee() >= (puits.getProfondeur() - nbLignes),
                     "Les éléments devraient être placés dans les " + nbLignes + " lignes les plus basses.");
@@ -62,11 +60,10 @@ public class TasTest {
 
     @Test
     public void testConstruireTasAvecCoordonneesUniques() {
-        int nbElements = 29; // Assurez-vous que ce nombre est inférieur ou égal à puits.getLargeur() * nbLignes
+        int nbElements = 29;
         int nbLignes = 3;
         tas = new Tas(puits, nbElements, nbLignes);
 
-        // Vérifier que tous les éléments ont des coordonnées uniques
         List<Element> elements = tas.getElements();
         Set<Coordonnees> coordonneesSet = new HashSet<>();
         for (Element element : elements) {

@@ -31,29 +31,29 @@ public class GraviteTest {
 
         gravite.applyGravite();
 
-        // Vérifiez que la pièce a bougé ou une nouvelle pièce a été générée.
+        // Vérifie que la pièce a bougé ou une nouvelle pièce a été générée.
         if (puits.getPieceActuelle() == piece) {
             // La pièce actuelle a bougé
             assertTrue(puits.getPieceActuelle().deplacerDe(0, 1));
         } else {
-            // Une nouvelle pièce a été générée
+            // Alors une nouvelle pièce a été générée
             assertNotNull(puits.getPieceActuelle());
         }
     }
 
     @Test
     public void testGraviteAvecCollision() {
-        // Créez une situation de collision
+        // On crée une situation de collision pour tester sa gestion
         Piece piece = usineDePiece.genererPiece();
         puits.setPieceSuivante(piece);
 
-        // Déplacez la pièce à la position de collision
+        // On déplace la pièce à la position de collision
         while (piece.deplacerDe(0, 1));
 
-        // Appliquez la gravité
+        // On applique la gravité
         gravite.applyGravite();
 
-        // Vérifiez qu'une nouvelle pièce a été générée après la collision
+        // On vérifie qu'une nouvelle pièce a été générée après la collision
         assertNotNull(puits.getPieceActuelle());
     }
 }

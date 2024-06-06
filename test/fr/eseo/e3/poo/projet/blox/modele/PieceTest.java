@@ -14,10 +14,10 @@ public class PieceTest {
 
     @BeforeEach
     public void setUp() {
-        puits = new Puits(10, 20); // Create a puits of 10 blocks wide and 20 blocks deep
+        puits = new Puits(10, 20); // Create un puit de 10 blocks de largeur and 20 blocks de hauteur
         piece = new OPiece(new Coordonnees(5, 5), Couleur.ROUGE); // Initialize piece at the center of the puits
         piece.setPuits(puits);
-        puits.setPieceSuivante(piece); // Set the piece as the next piece to be used
+        puits.setPieceSuivante(piece);
     }
 
     @Test

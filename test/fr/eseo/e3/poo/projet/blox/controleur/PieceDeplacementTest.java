@@ -51,12 +51,12 @@ public class PieceDeplacementTest {
                 elements.add(new Element(coordonnees.deplacerDe(0, 1), couleur));
                 elements.add(new Element(coordonnees.deplacerDe(1, 1), couleur));
             }
-        }); // Set another piece as next to trigger the current piece setup
+        });
     }
 
     @Test
     public void testMouseMoved() {
-        vuePuits.setSize(200, 400); // Assurez-vous que la largeur et la hauteur sont définies
+        vuePuits.setSize(200, 400);
 
         MouseEvent mouseEvent = new MouseEvent(vuePuits, 0, 0, 0, 100, 0, 1, false);
         vuePuits.dispatchEvent(mouseEvent);
