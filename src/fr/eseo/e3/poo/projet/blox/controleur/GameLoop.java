@@ -41,6 +41,7 @@ public class GameLoop implements ActionListener {
         if (!isGameOver) {
             gravite.applyGravite();
             vuePuits.repaint();
+            vuePuits.getPanneauInformation().setScore(puits.getTas().getScore());
             checkGameOver();
         }
     }

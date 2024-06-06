@@ -105,4 +105,8 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     public int getRowAt(int y) {
         return (y - MARGE) / tileSize;
     }
+
+    public PanneauInformation getPanneauInformation() {
+        return panneauInformation;
+    }
 }

@@ -5,10 +5,12 @@ import java.util.*;
 public class Tas {
     private final Puits puits;
     private final List<Element> elements;
+    private int score;
 
     public Tas(Puits puits) {
         this.puits = puits;
         this.elements = new ArrayList<>();
+        this.score = 0;
     }
 
     public Tas(Puits puits, int nbElements) {
@@ -47,6 +49,10 @@ public class Tas {
         return puits;
     }
 
+    public int getScore() {
+        return score;
+    }
+
     public boolean ajouterElements(Piece piece) {
         for (Element newElement : piece.getElements()) {
             for (Element existingElement : elements) {
@@ -63,10 +69,10 @@ public class Tas {
         return true;
     }
 
-
     void clearLines() {
         int profondeur = puits.getProfondeur();
         int largeur = puits.getLargeur();
+        int linesCleared = 0;
 
         for (int ord = 0; ord < profondeur; ord++) {
             List<Element> toRemove = new ArrayList<>();
@@ -85,6 +91,7 @@ public class Tas {
             }
             if (count == largeur) {
                 elements.removeAll(toRemove);
+                linesCleared++;
                 for (Element element : toMoveDown) {
                     if (element.getCoordonnees().getOrdonnee() < ord) {
                         element.setCoordonnees(new Coordonnees(element.getCoordonnees().getAbscisse(), element.getCoordonnees().getOrdonnee() + 1));
@@ -92,6 +99,17 @@ public class Tas {
                 }
             }
         }
+        if (linesCleared > 0) {
+            score += calculateScore(linesCleared);
+        }
     }
 
+    private int calculateScore(int linesCleared) {
+        int baseScore = 100;
+        int multiplier = 1;
+        for (int i = 0; i < linesCleared; i++){
+            multiplier = multiplier * 2;
+        }
+        return baseScore * multiplier;
+    }
 }
