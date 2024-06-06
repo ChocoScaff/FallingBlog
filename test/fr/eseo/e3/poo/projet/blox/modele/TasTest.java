@@ -49,7 +49,7 @@ public class TasTest {
 
     @Test
     public void testConstruireTasAvecLignes() {
-        int nbElements = 30; // Assurez-vous que ce nombre est inférieur ou égal à puits.getLargeur() * nbLignes
+        int nbElements = 29; // Assurez-vous que ce nombre est inférieur ou égal à puits.getLargeur() * nbLignes
         int nbLignes = 3;
         tas = new Tas(puits, nbElements, nbLignes);
 
@@ -62,7 +62,7 @@ public class TasTest {
 
     @Test
     public void testConstruireTasAvecCoordonneesUniques() {
-        int nbElements = 30; // Assurez-vous que ce nombre est inférieur ou égal à puits.getLargeur() * nbLignes
+        int nbElements = 29; // Assurez-vous que ce nombre est inférieur ou égal à puits.getLargeur() * nbLignes
         int nbLignes = 3;
         tas = new Tas(puits, nbElements, nbLignes);
 

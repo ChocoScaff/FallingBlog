@@ -10,12 +10,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PieceTest {
 
     private Puits puits;
-    private PieceConcrete piece;
+    private OPiece piece;
 
     @BeforeEach
     public void setUp() {
         puits = new Puits(10, 20); // Create a puits of 10 blocks wide and 20 blocks deep
-        piece = new PieceConcrete(new Coordonnees(5, 5), Couleur.ROUGE); // Initialize piece at the center of the puits
+        piece = new OPiece(new Coordonnees(5, 5), Couleur.ROUGE); // Initialize piece at the center of the puits
         piece.setPuits(puits);
         puits.setPieceSuivante(piece); // Set the piece as the next piece to be used
     }

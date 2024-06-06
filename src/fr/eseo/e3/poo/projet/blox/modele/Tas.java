@@ -70,20 +70,22 @@ public class Tas {
 
         for (int ord = 0; ord < profondeur; ord++) {
             List<Element> toRemove = new ArrayList<>();
+            List<Element> toMoveDown = new ArrayList<>();
             long count = 0;
             for (Element element : elements) {
                 if (element.getCoordonnees().getOrdonnee() == ord) {
                     count++;
                 }
+                if (element.getCoordonnees().getOrdonnee() == ord) {
+                    toRemove.add(element);
+                }
+                if (element.getCoordonnees().getOrdonnee() < ord) {
+                    toMoveDown.add(element);
+                }
             }
             if (count == largeur) {
-                for (Element element : elements) {
-                    if (element.getCoordonnees().getOrdonnee() == ord) {
-                        toRemove.add(element);
-                    }
-                }
                 elements.removeAll(toRemove);
-                for (Element element : elements) {
+                for (Element element : toMoveDown) {
                     if (element.getCoordonnees().getOrdonnee() < ord) {
                         element.setCoordonnees(new Coordonnees(element.getCoordonnees().getAbscisse(), element.getCoordonnees().getOrdonnee() + 1));
                     }
